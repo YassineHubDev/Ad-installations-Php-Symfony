@@ -3,16 +3,19 @@
 
 namespace App\Form;
 
+
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 class RegistrationFormType extends AbstractType
@@ -22,20 +25,17 @@ class RegistrationFormType extends AbstractType
         
         $builder
             ->add('email', null, array ('label' => false))
-            ->add('username', null, array ('attr' => array('placeholder' => 'Nom')))
+            ->add('nom', null, array ('attr' => array('placeholder' => 'Nom')))
             ->add('ville', null, array ('attr' => array('placeholder' => 'Ville')))
             ->add('raisonSociale', TextType::class, array ('attr' => array('placeholder' => 'Magasin'), 'required' => true))
-            ->add('plainPassword', RepeatedType::class, array(
+            
+             ->add('plainPassword', RepeatedType::class, [
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
                 'type' => PasswordType::class,
-                'options' => array(
-                    'translation_domain' => 'FOSUserBundle',
-                    'attr' => array(
-                        'autocomplete' => 'new-password',
-                    ),
-                ),
-                'first_options'   => array('attr' => array('placeholder' => 'Mot de passe')),
-                'second_options'  => array('attr' => array('placeholder' => 'Répétez le mot de passe',)),
-                'invalid_message' => 'fos_user.password.mismatch',
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez rentrer un mot de passe',
@@ -47,33 +47,51 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ))
+            ])
             
-            ->add('roles', CollectionType::class, [
-            'entry_type'   => ChoiceType::class,
-            'entry_options'  => [
-                'label' => false,
+            
+//            ->add('plainPassword', RepeatedType::class, array(
+//                'type' => PasswordType::class,
+//                'options' => array(
+//                    'translation_domain' => 'FOSUserBundle',
+//                    'attr' => array(
+//                        'autocomplete' => 'new-password',
+//                    ),
+//                ),
+//                'first_options'   => array('attr' => array('placeholder' => 'Mot de passe')),
+//                'second_options'  => array('attr' => array('placeholder' => 'Répétez le mot de passe',)),
+//                'invalid_message' => 'fos_user.password.mismatch',
+//                'constraints' => [
+//                    new NotBlank([
+//                        'message' => 'Veuillez rentrer un mot de passe',
+//                    ]),
+//                    new Length([
+//                        'min' => 6,
+//                        'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères',
+//                        // max length allowed by Symfony for security reasons
+//                        'max' => 4096,
+//                    ]),
+//                ],
+//            ))
+            
+                       ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Magasin' => 'ROLE_MAGASIN',
-                    'Client'  => 'ROLE_CLIENT',
+                    'Client' => 'ROLE_CLIENT',
                 ],
-            ],
+                'multiple' => false,
+                'expanded' => true,
+                'mapped' => false
             ])
   
         ;
     }
 
-    public function getParent()
-    {
-        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
-        // Or for Symfony < 2.8
-        // return 'fos_user_registration';
-    }
-    
-    
 
-    public function getBlockPrefix()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'app_user_registration';
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
     }
 }

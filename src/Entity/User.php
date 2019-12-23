@@ -1,75 +1,157 @@
 <?php
-// src/App/Entity/User.php
-    
+
 namespace App\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
- /**
-  * @ORM\Entity
-  * @ORM\Table(name="User")
-  * @Vich\Uploadable
-  */
-class User extends BaseUser
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email déjà utilisé")
+ */
+class User implements UserInterface
 {
     /**
-     * @ORM\Id
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
-    private $ville;
+    private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $raisonSociale;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
 
- 
-    public function __construct()
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+    
+    
+    
+    
+    
+    //GETTER & SETTER
+
+    public function getId(): ?int
     {
-        parent::__construct();
-        // your own logic
-    }
-    
-    
-    
-    
-    //getter & setter
-    
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
+        return $this->id;
     }
 
-    public function setAdresse(?string $adresse): self
+    public function getEmail(): ?string
     {
-        $this->adresse = $adresse;
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
-    
-    
 
-    public function getCodepost(): ?int
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->codepost;
+        return (string) $this->email;
     }
 
-    public function setCodepost(?int $codepost): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->codepost = $codepost;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getRaisonSociale(): ?string
+    {
+        return $this->raisonSociale;
+    }
+
+    public function setRaisonSociale(?string $raisonSociale): self
+    {
+        $this->raisonSociale = $raisonSociale;
 
         return $this;
     }
@@ -86,29 +168,26 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getNom(): ?string
     {
-        return $this->telephone;
+        return $this->nom;
     }
 
-    public function setTelephone(?int $telephone): self
+    public function setNom(string $nom): self
     {
-        $this->telephone = $telephone;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getRaisonSociale(): ?string
+    public function getPlainPassword()
     {
-        return $this->raisonSociale;
+        return $this->plainPassword;
     }
 
-    public function setRaisonSociale(?string $raisonSociale): self
+    public function setPlainPassword($password)
     {
-        $this->raisonSociale = $raisonSociale;
-
-        return $this;
+        $this->plainPassword = $password;
     }
 
-    
 }

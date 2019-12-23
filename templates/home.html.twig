@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
+{% block body %}
         {% for message in app.flashes('notice') %}      
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           {{ message }}
@@ -21,7 +21,7 @@
         {% elseif is_granted('ROLE_MAGASIN') %}
         <a class="devis" href="{{ path('app_form_magasin') }}">DEVIS</a>
         {% else %}
-        <a class="devis" href="{{ path('fos_user_security_login') }}">DEVIS</a>
+        <a class="devis" href="{{ path('app_login') }}">DEVIS</a>
         {% endif %}
         <a href="#QSN">
             <img class="scroll" src="img/upload/fleche.png" alt="">

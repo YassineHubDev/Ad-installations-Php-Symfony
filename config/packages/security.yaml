@@ -1,6 +1,8 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: argon2i
+        App\Entity\User:
+            algorithm: argon2i
+
     
     role_hierarchy:
         ROLE_MAGASIN: ROLE_USER
@@ -17,8 +19,9 @@ security:
                 class: App\Entity\User
                 property: email 
                 
-        fos_userbundle:
-            id: fos_user.user_provider.username_email
+#        fos_userbundle:
+#            id: fos_user.user_provider.username_email
+        # used to reload user from session & other features (e.g. switch_user)
                     
     firewalls:
         dev:
@@ -29,16 +32,16 @@ security:
             user_checker: security.user_checker
             form_login:
                 csrf_token_generator: security.csrf.token_manager
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
+#                login_path: fos_user_security_login
+#                check_path: fos_user_security_check
                 
-                provider: fos_userbundle
+#                provider: fos_userbundle
                 #always_use_default_target_path: false
                 #default_target_path:
                 
             logout:
-                path: fos_user_security_logout
-                target: /
+                path: app_logout
+                target: app_home
             anonymous: true
             
             remember_me:

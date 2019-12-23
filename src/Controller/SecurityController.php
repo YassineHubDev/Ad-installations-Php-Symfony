@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/user/logout", name="app_logout")
+     * @Route("/logout", name="app_logout")
      * @throws \Exception
      */
     public function logout()
@@ -24,21 +24,21 @@ class SecurityController extends AbstractController
         throw new \Exception('');
     }
     
-//    /**
-//     * @Route("/home")
-//     */
-//    public function redictAction()
-//    {
-//        $authChecker = $this->container-get ('security.authorization_checker');
-//        
-//        if($authChecker->isGranted('ROLE_CLIENT')) {
-//            return $this->render('form/formclient/html.twig');
-//        } else if ($authChecker->isGranted('ROLE_MAGASIN')) {
-//            return $this->render('form/formmag/html.twig');
-//        } else {
-//            return $this->render('security/login/html.twig');
-//        }
-//    }
+    /**
+     * @Route("/home")
+     */
+    public function redictAction()
+    {
+        $authChecker = $this->container-get ('security.authorization_checker');
+        
+        if($authChecker->isGranted('ROLE_CLIENT')) {
+            return $this->render('form/formclient/html.twig');
+        } else if ($authChecker->isGranted('ROLE_MAGASIN')) {
+            return $this->render('form/formmag/html.twig');
+        } else {
+            return $this->render('security/login/html.twig');
+        }
+    }
     
 public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {

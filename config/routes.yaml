@@ -3,11 +3,7 @@
 #    controller: App\Controller\DefaultController::index
 
 logout:
-    path: fos_user_security_logout 
+    path: /logout
       
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-    
-fos_login:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+

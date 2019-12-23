@@ -6,7 +6,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "easycorp/easyadmin-bundle": "^2.2",
-        "friendsofsymfony/user-bundle": "^2.1",
         "sensio/framework-extra-bundle": "^5.1",
         "sonata-project/admin-bundle": "^3.51",
         "symfony/apache-pack": "^1.0",
