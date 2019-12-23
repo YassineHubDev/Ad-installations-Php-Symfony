@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre projet{% endblock %}
+
+{% block content %}
+
+{{ form_start(clientForm) }}
+lllllllpopo
+
+<div id="titre_projet">
+    <h2>Faites-nous part de votre projet !</h2>
+</div>
+    
+<section id="sectionformmag">
+   
+   
+    <div id="page_login">
+    {{ form_row(clientForm.sujet, {'label' : false}) }}
+    {{ form_errors(clientForm.sujet) }}
+    {{ form_widget(clientForm.sujet) }}
+    
+    {{ form_row(clientForm.projet, {'label' : false}) }}
+    {{ form_errors(clientForm.projet) }}
+    {{ form_widget(clientForm.projet) }}
+    
+    {{ form_row(clientForm.imageFile, {'label' : false}) }}
+    {{ form_errors(clientForm.imageFile) }}
+    {{ form_widget(clientForm.imageFile) }}
+    
+    {{ form_widget(clientForm) }}
+        <input type="submit" class="btn btn-lg btn-primary" value="Register">
+    {{ form_end(clientForm) }}
+    
+</div>
+</section>
+{% endblock %}
+

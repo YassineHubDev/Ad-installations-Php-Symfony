@@ -1,0 +1,630 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*NAVBAR*/
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+ul li {
+    list-style: none;
+    font-size: 20px;
+    font-family: 'Mukta Malar', sans-serif;
+}
+
+/*IMAGE ACCUEIL*/
+.cuisinaccueil {
+    display: flex;
+    position: relative;
+}
+
+.photo-opacity {
+    margin-top: 56px;
+    max-width: 100%;
+    height: auto
+}
+
+.scroll{
+    display: flex;
+    position: absolute;
+    top: 91%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 7%;
+}
+
+img {
+    height: auto;
+}
+
+.titreh3 {
+    color: white;
+    display: flex;
+/*    font-family: 'Hind Madurai', sans-serif;*/
+    font-size: 1.9vw;
+    text-align: center;
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 -36% 0 0
+}
+
+.devis {
+    display: flex;
+/*    font-family: 'Hind Madurai', sans-serif;*/
+    font-size: 1.9vw;
+    text-align: center;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    border: 1px solid white !important;
+/*    border-radius: 24px;*/
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    color: white;
+    padding: 0 15px;
+    transition: 1s;
+}
+
+.devis:hover {
+    color: dimgrey;
+    transition: 0.5s;
+    color: rgb(172,146,123);
+    background-color: #FFFFFF;
+    text-decoration-line: none
+}
+
+
+#calque {
+    position: absolute;
+    left: 26%;
+    bottom: 25%;
+    width: 50%;
+    height: 58%;
+    background-color: rgba(172,146,123,0.5);
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    color: white;
+/*    box-shadow: 1px 1px 12px #555;*/
+    max-width: 100%
+}
+
+
+h2 {
+    color: #8B4513;
+    text-align: center;
+    font-size: 25px;
+}
+
+/*QUI SOMMES NOUS ?*/
+.article2 {
+    padding-top: 60px;
+    width: 100%;
+    height: auto;
+    text-align: justify;
+    background-color: transparent;
+    font-family: 'Mukta Malar', sans-serif;
+}
+
+.presentation {
+    font-size: 20px;
+}
+
+.titrespe {
+    font-family: 'Mukta Malar', sans-serif;
+    color: #8B4513
+}
+
+
+/*COMPETENCES AD-INSTALLATIONS*/
+.titre_competences {
+    font-size: 25px;
+    text-align: center
+}
+
+.competences {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.testhover {
+    overflow: hidden
+}
+
+.figure_1 {
+    background-color: transparent;
+    width: 277px;
+    height: 380px;
+}
+
+.img_elec {
+    width: 277px;
+    height: 190px;
+    transition: 1s
+}
+
+.img_elec:hover{
+    transform: scale(1.2);
+    transition: 1s
+}
+
+.cadre_1 {
+    width: 277px;
+    height: 190px;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    background-color: #D2B48C;
+    color: black
+}
+
+.figure_2 {
+    background-color: transparent;
+    width: 277px;
+    height: 380px;
+    transition: 1s
+}
+
+.img_plomb {
+    width: 277px;
+    height: 190px;
+    transition: 1s
+}
+
+.img_plomb:hover{
+    transform: scale(1.2);
+    transition: 1s
+}
+
+.cadre_2 {
+    width: 277px;
+    height: 190px;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    background-color: #FFF8DC;
+    color: black
+}
+
+.figure_3 {
+    background-color: transparent;
+    width: 277px;
+    height: 380px;
+    transition: 1s
+}
+
+.img_carr {
+    width: 277px;
+    height: 190px;
+    transition: 1s
+}
+
+.img_carr:hover{
+    transform: scale(1.2);
+    transition: 1s
+}
+
+.cadre_3 {
+    width: 277px;
+    height: 190px;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    background-color: #D2B48C;
+    color: black
+}
+
+.figure_4 {
+    background-color: transparent;
+    width: 277px;
+    height: 380px;
+    transition: 0.5s;
+}
+
+.img_menui {
+    width: 277px;
+    height: 190px;
+    transition: 1s
+}
+
+.img_menui:hover{
+    transform: scale(1.2);
+    transition: 1s
+}
+
+.cadre_4 {
+    width: 277px;
+    height: 190px;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    background-color: #FFF8DC;
+    color: black
+}
+
+.explications {
+    font-size: 16px
+}
+
+
+/*PARALLAX PHOTO SDB*/
+.parallax-window {
+    min-height: 400px;
+    background: transparent;
+}
+
+/*PLUSIEURS FACONS DE COLLABORER*/
+#collaboration {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    width: 100%
+}
+
+.testhover2 {
+    width: 70%;
+    overflow: hidden;
+    height: auto
+}
+
+.img_planSDB {
+    width: 123%;
+    height: auto;
+    transition: 1s
+}
+
+.img_planSDB:hover {
+    transform: scale(1.2);
+    transition: 1s
+}
+
+.calque2 {
+    margin-top: 60px;
+    width: 333px;
+    height: 368px;
+    text-align: center;
+    color: black;
+    font-family: 'Mukta Malar', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+.tajriba1 {
+    width: 100%;
+    height: 122px;
+    padding: 9% 1%;
+    font-size: 16px
+}
+
+.tajriba2 {
+    width: 100%;
+    height: 122px;
+    padding: 9% 10%;
+    font-size: 16px
+}
+
+.tajriba3 {
+    width: 100%;
+    height: 122px;
+    padding: 12% 10%;
+    font-size: 16px
+}
+
+.lightbox { 
+    width: 60vw; 
+    margin: 50px 20vw; 
+    display: block; 
+    position: absolute; 
+    z-index: 10;
+}
+
+ul.hover_block {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+fieldset {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+/*    margin-top: 50px;*/
+    margin-top: 0px;
+}
+        
+legend {
+    font-size: 25px;
+}
+
+.hover_block li {
+    list-style: none;
+    margin: 10px 20px;
+    width: 320px; /*padding: 14px*/
+}
+
+.hover_block li a {
+    color: #000;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    height: 160px;
+    display: block;
+    padding: 14px
+}
+
+.test2 {
+    position: absolute;
+    max-width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.titreformclient {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.custom-file-label {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    z-index: 1;
+    color: #495057;
+    background-color: #fff;
+}
+
+.btn-success {
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-success:hover {
+    color: black;
+    background-color: #FFF8DC;
+    border-color: black;
+}
+
+/*page login*/
+
+.test10 {
+    width: 100%;
+    height: auto;
+}
+
+.img_login {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: red
+}
+
+.row {
+    justify-content: center
+}
+
+.text-center1 {
+        margin-left: 1px;
+}
+
+.accueil_specialite {
+    display: flex;
+    position: relative;
+}
+
+.photo-opacity2 {
+/*    filter: opacity(50%);*/
+    margin-top: 56px;
+    max-width: 100%;
+    height: auto
+}
+
+#la_cuisine {
+    height: auto;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+
+
+.cuisine_test7 {
+    width: 332px;
+    height: 218px;
+    background-color: transparent;
+    margin-bottom: 52px;
+    overflow: hidden
+}
+
+.img_gal {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transition: 1s;
+    margin-top: -31px;
+}
+
+.img_gal:hover {
+    transform: scale(1.2);
+    transition: 1s
+}
+
+.fos_user_registration_register {
+    border: 1px solid black !important;
+    padding: 40px 36px 50px 36px;
+    margin: 110px 0 59px 0;
+}
+
+/*largeur du champ MDP dans registration*/
+.checkmail {
+    margin-top: 20%;
+    margin-bottom: 350px;
+    padding: 31px;
+    text-align: justify;
+}
+
+.messconfirmed {
+    margin-top: 30%;
+    margin-bottom: 400px;
+    padding: 31px;
+    text-align: justify;
+}
+
+.alert-success {
+    z-index: 2;
+    width: 100%;
+    margin-top: 63px;
+    position: fixed
+}
+
+.modifmdp {
+    margin-top: 40%;
+    margin-bottom: 50%;
+    padding: 0px;
+    text-align: justify;
+}
+
+.resetcheckmail {
+    margin-top: 33%;
+    margin-bottom: 20%;
+    padding: 31px;
+    text-align: justify;
+}
+
+.newmdp {
+    margin-top: 67%;
+    margin-bottom: 44%;
+    padding: 31px;
+    text-align: justify;
+}
+
+.imgregister {
+    height: 100%;
+    width: auto;
+    z-index: 3
+}
+
+#app_user_registration {
+    display: none
+}
+
+
+/*FORM-CLIENT*/
+#page_login {
+    margin: 60px 0 5px 0;
+    padding: 22px 22px 22px 22px;
+    text-align: justify;
+    border: 1px solid black !important;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* MENTIONS MEGALES*/ 
+.mentions_leg {
+    margin: 70px 60px;
+    text-align: justify;
+}
+
+h5, h4 {
+    font-weight: bold
+}
+
+.underline {
+    text-decoration: underline
+}
+
+.bold {
+    font-weight: bold
+}
+
+#sectionformmag {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+textarea.form-control {
+    height:  150px
+}
+
+#titre_projet {
+    margin: 65px 60px
+}
+
+.coco1 {
+    width: auto
+}
+
+.img_armony {
+    width: 165px;
+    height: auto;
+    padding-top: 9px;
+    max-width: 100%;
+    height: auto
+}
+
+.img_cuisinella {
+    width: 170px;
+    height: auto;
+    margin-right: 15px;
+    max-width: 100%;
+    height: auto
+}
+
+.img_mobalpa {
+    width: 170px;
+    height: auto;
+    margin-right: 15px;
+    max-width: 100%;
+    height: auto
+}
+
+.img_schmidt {
+    width: 216px;
+    height: auto;
+    margin-right: 7px;
+    padding-bottom: 4px;
+    max-width: 100%;
+    height: auto
+}
+
+.img_snaidero {
+    width: 170px;
+    height: auto;
+    padding-top: 19px;
+    max-width: 100%;
+    height: auto
+}
+
+.img_socooc {
+    width: 165px;
+    height: auto;
+    margin-right: 8px;
+    max-width: 100%;
+    height: auto
+}
+
+#confiance {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}

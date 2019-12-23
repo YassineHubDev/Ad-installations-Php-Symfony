@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-site-verification" content="beNKTA_8LYFNNCJjsW2-6tZVnOZFGqrnM2JRZ9roB0M" />
+    <title>AD-INSTALLATIONS : Installateurs professionels à Paris</title>
+    <meta name="description" content="AD-INSTALLATIONS : spécialiste de la pose et montage de cuisines, salles de bain et placards, en île de France, par des installateurs professionnels dotés de 40 ans d'expérience.">
+    {% block stylesheets %}
+       {{ encore_entry_link_tags ( 'app' ) }}
+       {{ encore_entry_link_tags ( 'bootstrap.min' ) }}
+       {{ encore_entry_link_tags ( 'jquery.fancybox.min' ) }}
+       {{ encore_entry_link_tags ( 'index' ) }}
+       {{ encore_entry_link_tags ( 'parallax' ) }}
+        <link href="https://fonts.googleapis.com/css?family=Hind+Madurai:700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Mukta+Malar&display=swap" rel="stylesheet"> 
+    {% endblock %}
+</head>
+
+<body>
+
+<header>
+{% block navbar %}
+    {% include 'inc/navbar.html.twig' %}
+{% endblock %}
+</header>
+
+
+    {% block content %}
+
+    {% endblock %}
+   
+
+{% block javascripts %}
+   {{ encore_entry_script_tags ( 'app' ) }}
+   {{ encore_entry_script_tags ( 'jquery-3.4.1.min' ) }}
+   {{ encore_entry_script_tags ( 'bootstrap.bundle.min' ) }}
+   {{ encore_entry_script_tags ( 'parallax' ) }}
+   {{ encore_entry_script_tags ( 'jquery.fancybox.min_1' ) }}
+   {{ encore_entry_script_tags ( 'core' ) }}
+   {{ encore_entry_script_tags ( 'fullscreen' ) }}
+   {{ encore_entry_script_tags ( 'guestures' ) }}
+   {{ encore_entry_script_tags ( 'hash' ) }}
+   {{ encore_entry_script_tags ( 'media' ) }}
+   {{ encore_entry_script_tags ( 'modal-redirect' ) }}
+   {{ encore_entry_script_tags ( 'share' ) }}
+   {{ encore_entry_script_tags ( 'slideshow' ) }}
+   {{ encore_entry_script_tags ( 'thumbs' ) }}
+   {{ encore_entry_script_tags ( 'wheel' ) }}
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% endblock %}
+
+
+<footer>
+    {% block footer %}
+        {% include 'inc/footer.html.twig' %}
+    {% endblock %}
+</footer>
+
+<script>
+    $('.parallax-window').parallax({imageSrc: 'img/upload/salle_de_bain.jpg'});
+    
+        
+    $(document).ready(function(){
+            
+            $('.hover_block li').hover(function(){
+                $(this).find('img').animate({opacity: '0.2'},
+                1000);
+            }, function(){
+                $(this).find('img').animate({opacity: '1'},
+                1000);
+            });
+            
+        });
+    
+    $(function() {
+        
+            $('a[href*=#QSN]').on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+            });
+        });
+
+    
+    function bigImage(){
+    mesImg.src = this.src;
+    }  
+            
+   var vignettes = document.querySelectorAll('.thumbnail');
+    
+    for (var i = 0; i < vignettes.length; i++)
+        
+        vignettes [i].addEventListener('click', function(){
+           // console.log('test du click'); // pour tester le click
+        document.querySelector('#galerie img').src = this.src;
+        document.querySelector('.titre').innerHTML = this.alt;
+            
+        document.querySelector('.selected').classList.remove('selected'); //on sélectionne la balise de classe "selected" dont on retire la classe "selected" pour que la bordure devienne blanche par défaut.
+        this.classList.add('selected'); // puis on ajoute sur la vignette cliquée (= this) la classe "selected" pour que sa bordure devienne rouge
+    });
+        
+    
+    
+     function effacer() {
+     document.getElementById("app_user_registration_raisonSociale").disabled = true;
+     document.getElementById("app_user_registration_raisonSociale").removeAttribute("required");    
+     }
+        
+    
+    function afficher() {
+    document.getElementById("app_user_registration_raisonSociale").disabled = false;
+    document.getElementById("app_user_registration_raisonSociale").setAttribute("required", "");
+    
+    }
+    
+    
+//    $(document).ready(function() {
+//        
+//$("#app_user_registration_roles_0").click(function() {
+//    
+//$("#app_user_registration_raisonSociale").prop("required", true);    
+//$("#app_user_registration_raisonSociale").prop("disabled", false);
+//});      
+//        
+//        
+//$("#app_user_registration_roles_1").click(function(){
+//$("#app_user_registration_raisonSociale").prop("required", false);    
+//$("#app_user_registration_raisonSociale").prop("disabled", true);
+//});
+//
+//;
+//
+//})
+//
+//    
+//    
+    
+    
+
+</script>
+
+</body>
+</html>
+

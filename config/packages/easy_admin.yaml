@@ -1,0 +1,82 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        User:
+            class: App\Entity\User
+#            form:
+#                fields:
+#                    - Nom
+#                    - Prenom
+#                    - Adresse
+#                    - Email
+#                    - Password
+#                    - Clients
+#                    - Magasins
+            
+        Client:
+            class: App\Entity\Client
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'contractFile', type: 'vich_file' }
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.client%' }
+                    - contract
+                    - { property: 'contract', template: 'contract.html.twig', base_path: '%app.path.client%' }
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.client%' } 
+            
+                    
+                    
+        Magasin:
+            class: App\Entity\Magasin
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'contractFile', type: 'vich_file' }
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.magasin%' }
+                    - contract
+                    - { property: 'contract', template: 'contract.html.twig', base_path: '%app.path.magasin%' }
+            show:
+                fields:
+                     - { property: 'image', type: 'image', base_path: '%app.path.magasin%' } 
+            
+    site_name: 'AD-INSTALLATIONS'
+    
+    design:
+        form_theme:
+            - '@EasyAdmin/form/bootstrap_4.html.twig'
+            - '@VichUploader/Form/fields.html.twig'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

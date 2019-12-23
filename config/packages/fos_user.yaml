@@ -1,0 +1,48 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+        
+    from_email:
+        address: "contact@ad-installations.fr"
+        sender_name: "AD-INSTALLATIONS"
+        
+    registration:
+        confirmation:
+            enabled: true
+            template:  '@FOSUser/Registration/email.txt.twig'
+            from_email:
+                address: "contact@ad-installations.fr"
+                sender_name: "AD-INSTALLATIONS"
+        form:
+            type: FOS\UserBundle\Form\Type\RegistrationFormType
+            name: fos_user_registration_form
+            
+    service:
+        mailer: fos_user.mailer.twig_swift
+        
+    resetting:
+        email:
+            from_email:
+                address: "contact@ad-installations.fr"
+                sender_name: "AD-INSTALLATIONS"
+        form:
+            type: FOS\UserBundle\Form\Type\ResettingFormType # or 'fos_user_resetting' on Symfony < 2.8
+            name: fos_user_resetting_form
+            
+            
+    profile:
+        form:
+            type: FOS\UserBundle\Form\Type\ProfileFormType # or 'fos_user_profile' on Symfony < 2.8
+            name: fos_user_profile_form
+
+    change_password:
+        form:
+            type: FOS\UserBundle\Form\Type\ChangePasswordFormType # or 'fos_user_change_password' on Symfony < 2.8
+            name: fos_user_change_password_form
+            
+            
+            
+            
+            
+         

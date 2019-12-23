@@ -1,0 +1,71 @@
+   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a class="navbar-brand text-white" href="/">AD-INSTALLATIONS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="#">Accueil<span class="sr-only">(current)</span></a>
+            </li> -->
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('app_cuisine') }}" tabindex="-1" aria-disabled="true">Cuisines</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('app_sdb') }}" tabindex="-1" aria-disabled="true">Salles de bain</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('app_placard') }}" tabindex="-1" aria-disabled="true">Placards</a>
+            </li>
+            
+            
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('admin_index') }}">Administration</a>
+                </li>
+            {% endif %}
+
+    
+
+            {% if is_granted('ROLE_MAGASIN') %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('app_form_magasin') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
+                </li>
+            {% endif %}
+            
+            {% if is_granted('ROLE_CLIENT') %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('app_form_client') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
+                </li>
+            {% endif %}
+            
+        </ul>
+        
+        
+        <ul class="navbar-nav">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('fos_user_profile_edit') }}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('fos_user_registration_register') }}" tabindex="-1" aria-disabled="true">S'inscrire</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('fos_user_security_login') }}" tabindex="-1" aria-disabled="true">Se connecter</a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>
+
+

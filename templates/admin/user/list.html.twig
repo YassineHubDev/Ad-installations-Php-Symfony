@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                {# Le filtre "join" permet de convertir un tableau en chaîne de caractères #}
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>
+                    <a href="{{ path('admin_user_changeroles', {id: user.id}) }}" class="btn btn-info">Changer le rôle</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
