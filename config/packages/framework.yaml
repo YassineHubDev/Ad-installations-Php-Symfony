@@ -4,7 +4,7 @@ framework:
     translator: ~
     templating:
         engines: ['twig', 'php']
-    #csrf_protection: true
+    #csrf_protection: ~
     #http_method_override: true
 
     # Enables session support. Note that the session will ONLY be started if you read or write from it.

@@ -25,17 +25,19 @@ class RegistrationFormType extends AbstractType
         
         $builder
             ->add('email', null, array ('label' => false))
-            ->add('nom', null, array ('attr' => array('placeholder' => 'Nom')))
+            ->add('username', null, array ('attr' => array('placeholder' => 'Nom')))
             ->add('ville', null, array ('attr' => array('placeholder' => 'Ville')))
             ->add('raisonSociale', TextType::class, array ('attr' => array('placeholder' => 'Magasin'), 'required' => true))
             
+    
              ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('attr' => array('placeholder' => 'Mot de passe')),
+                'second_options' => array('attr' => array('placeholder' => 'Répétez le mot de passe',)),
+                'invalid_message' => 'Les mots de passe sont différents !',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez rentrer un mot de passe',
@@ -74,7 +76,7 @@ class RegistrationFormType extends AbstractType
 //                ],
 //            ))
             
-                       ->add('roles', ChoiceType::class, [
+            ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Magasin' => 'ROLE_MAGASIN',
                     'Client' => 'ROLE_CLIENT',

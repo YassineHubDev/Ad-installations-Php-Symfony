@@ -17,7 +17,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: email 
+                property: apiKey 
                 
 #        fos_userbundle:
 #            id: fos_user.user_provider.username_email
@@ -32,12 +32,12 @@ security:
             user_checker: security.user_checker
             form_login:
                 csrf_token_generator: security.csrf.token_manager
-#                login_path: fos_user_security_login
-#                check_path: fos_user_security_check
+                login_path: app_login
+                check_path: app_login
                 
-#                provider: fos_userbundle
+                #provider: fos_userbundle
                 #always_use_default_target_path: false
-                #default_target_path:
+                default_target_path: /
                 
             logout:
                 path: app_logout
@@ -51,8 +51,8 @@ security:
             provider: app_user_provider
             guard:
                 authenticators:
-                    - App\Security\AppAuthenticator          
-            
+                    - App\Security\TokenAuthenticator         
+            stateless: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
 
+   {{ form_start(registrationForm) }}
+        
+    
         
 <form class="text-center1 border border-dark p-5">  
+  
    
-<!--
     <fieldset class="form-group">
+    {{ form_row(registrationForm.roles, {'label' : "Vous êtes :"})}}
+    {{ form_widget(registrationForm.roles) }}
+    
+<!--
        <legend class="col-form-label">Vous êtes :</legend>
           
           
@@ -37,15 +44,13 @@
                     <label class="form-check-label" for="app_user_registration_roles_1">Un particulier</label>
                 </div>
             </div>
+-->
     </fieldset>
         
--->
-
         <div class="form-row">
             <div class="col">
-            
-            {{ form_row(registrationForm.nom, {'label' : false})}}
-            {{ form_widget(registrationForm.nom) }}
+                {{ form_row(registrationForm.username, {'label' : false})}}
+                {{ form_widget(registrationForm.username) }}
             </div>
             
          
@@ -56,21 +61,34 @@
 
         <div class="form-row">
             <div class="col">
-            {{ form_row(registrationForm.ville, {'label' : false})}}
-            {{ form_widget(registrationForm.ville) }}
+                {{ form_row(registrationForm.ville, {'label' : false})}}
+                {{ form_widget(registrationForm.ville) }}
             </div>
 
             <div class="col">    
-            {{ form_row(registrationForm.email, { 'attr': {'placeholder': "e-mail" }}) }}
-            {{ form_widget(registrationForm.email) }}
+                {{ form_row(registrationForm.email, { 'attr': {'placeholder': "e-mail" }}) }}
+                {{ form_widget(registrationForm.email) }}
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(registrationForm.plainPassword.first, {'label' : false})}}
+            </div>
+            
+            <div class="col">    
+                {{ form_row(registrationForm.plainPassword.second, {'label' : false}) }}
             </div>
         </div>
        
 
-          
     {{ form_widget(registrationForm) }}
-        <input type="submit" class="btn btn-success" value="{{ 'registration.submit'|trans }}"/>    
+        <input type="submit" class="btn btn-success" value="Register"/>    
     {{ form_end(registrationForm) }}
 
+</form>
 
+
+{{ form_end(registrationForm) }}
+        
 {% endblock %}

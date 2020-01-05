@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Security\TokenAuthenticator;
 
 
 
@@ -56,6 +58,86 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
         } else {
             throw new \Exception('Tu n\'est ni un client ni un magasin, qui es-tu donc ?');
         }
+    }
+    
+     /**
+      * @Route("/forgotten_password", name="app_forgotten_password")
+      */
+    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenAuthenticator $tokenAuthenticator): Response
+    {
+
+        if ($request->isMethod('POST')) {
+
+            $email = $request->request->get('email');
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
+            /* @var $user User */
+
+            if ($user === null) {
+                $this->addFlash('danger', 'Email Inconnu');
+                return $this->redirectToRoute('app_home');
+            }
+            $token = $tokenGenerator->generateToken();
+
+            try{
+                $user->setResetToken($token);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+                return $this->redirectToRoute('app_home');
+            }
+
+            $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+
+            $message = (new \Swift_Message('Mot de passe oublié'))
+                ->setFrom('y.aabidouche@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    "blablabla voici le token pour reseter votre mot de passe : " . $url,
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            $this->addFlash('notice', 'E-mail envoyé');
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('security/forgotten_password.html.twig');
+    }
+    
+    
+    /**
+     * @Route("/reset_password/{token}", name="app_reset_password")
+     */
+    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        if ($request->isMethod('POST')) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
+            /* @var $user User */
+
+            if ($user === null) {
+                $this->addFlash('danger', 'Token Inconnu');
+                return $this->redirectToRoute('app_home');
+            }
+
+            $user->setResetToken(null);
+            $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'Mot de passe mis à jour');
+
+            return $this->redirectToRoute('app_home');
+        }else {
+
+            return $this->render('security/reset_password.html.twig', ['token' => $token]);
+        }
+
     }
 
 }

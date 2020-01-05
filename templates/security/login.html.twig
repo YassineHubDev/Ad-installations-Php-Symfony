@@ -1,31 +1,69 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-
-<form method="post">
+<br> <br> <br> <br>  
+<!-- Default form login -->
+<form action="{{ path('app_login') }}" method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+   
     
 
-    <h1 class="h3 mb-3 font-weight-normal">Veuillez vous identifier</h1>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
+<!--    <p class="h4 mb-4">Connectez-vous</p>-->
+<div id="page_login">
+    <!-- Email -->
+    <div>
+        <label for="inputEmail" ></label>
+        <input class="form-control mb-4" type="text" id="username" name="_username" placeholder="Email" required="required" value="{{ last_username }}" required autofocus>
+    </div>
+    
+   
+    <!-- Password -->
+    <div>
+        <label for="inputPassword"></label>
+        <input type="password" id="inputPassword" class="form-control mb-4" name="_password" placeholder="Mot de passe" required>
+    </div>
+    
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}">
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi
-            </label>
+    <div class="d-flex justify-content-around">
+        <div>
+            <!-- Remember me -->
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" value="on" name="_remember_me">
+                <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi </label>
+            </div>
         </div>
+            
+        
+        
+        
+        
+        
+        <div>
+            <!-- Forgot password -->
+            <a href="{{ path('app_forgotten_password') }}">MDP oublié ?</a>
+        </div>
+    </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Se connecter
-    </button>
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4" type="submit">Se connecter</button>
+
+    <!-- Register -->
+    <p>Vous n'avez pas de compte ?
+        <a href="{{ path('app_register') }}">Inscrivez-vous</a>
+    </p>
+</div>
 </form>
+
+
+<br> <br> <br> <br> 
+<!-- Default form login -->
+
+
 {% endblock %}

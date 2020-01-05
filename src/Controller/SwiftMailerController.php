@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class EmailController extends AbstractController
+class SwiftMailerController extends AbstractController
 {
     /**
      * @Route("/email", name="email")

@@ -22,7 +22,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\Email(strict=true, message="Le format de l'email est incorrect")
      */
     private $email;
 
@@ -33,7 +33,7 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string")
      */
     private $password;
 
@@ -48,20 +48,36 @@ class User implements UserInterface
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nom;
+    private $username;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $plainPassword;
+    private $apiToken;
+    
+    
+     /**
+      * @var string le token qui servira lors de l'oubli de mot de passe
+      * @ORM\Column(type="string", length=255, nullable=true)
+      */
+    protected $resetToken;
     
     
     
+    public function isApiTokenValid()
+    {
+        return $this->apiToken == $this->generateApiToken();
+    }
+
+    public function __construct()
+{
+    // By doing that, the apiToken is not encrypted in the database.
+    // You should consider using the PasswordEncoder to encode/verify the apiToken
+    $this->apiToken = bin2hex(random_bytes(20));
+}
+ 
     
     
     //GETTER & SETTER
@@ -168,26 +184,48 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNom(): ?string
+    public function setUsername(?string $username): self
     {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
+        $this->username = $username;
 
         return $this;
     }
 
-    public function getPlainPassword()
+    public function getApiToken(): ?string
     {
-        return $this->plainPassword;
+        return $this->apiToken;
     }
 
-    public function setPlainPassword($password)
+    public function setApiToken(?string $apiToken): self
     {
-        $this->plainPassword = $password;
+        $this->apiToken = $apiToken;
+
+        return $this;
     }
+    
+    
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+    
+     /**
+      * @return string
+      */
+    public function getResetToken(): string
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param string $resetToken
+     */
+    public function setResetToken(?string $resetToken): void
+    {
+        $this->resetToken = $resetToken;
+    }
+
 
 }

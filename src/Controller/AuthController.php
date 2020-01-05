@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationMagType;
-use App\Security\AppAuthenticator;
+use App\Security\TokenAuthenticator;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use App\Notification\ContactNotification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,29 +29,24 @@ class AuthController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-
-
     /**
-     * @Route("/user/register", name="app_register")
+     * @Route("/register", name="app_register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param AppAuthenticator $authenticator
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
+    public function register(Request $request, ContactNotification $notification, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, TokenAuthenticator $tokenAuthenticator, TokenGeneratorInterface $tokenGenerator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $notification->notify($user);
             $datas = $request->request->get('registration_form', []);
-
             if (array_key_exists('roles', $datas)) {
                 $user->setRoles([$datas['roles']]);
             }
@@ -60,13 +57,18 @@ class AuthController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+                        
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
+            
+            $email = $user->getEmail();
+            $username = $user->getUsername();
+            $mailerService->sendApiToken($mailer, $apiToken, $email, $username, 'registration.html.twig');
+            
+            
+            
             // do anything else you need here, like send an email
-
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
@@ -74,9 +76,49 @@ class AuthController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
