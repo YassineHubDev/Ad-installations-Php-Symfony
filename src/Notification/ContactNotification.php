@@ -4,8 +4,7 @@ namespace App\Notification;
 
 use App\Entity\User;
 use Twig\Environment;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ContactNotification {
     
@@ -21,21 +20,30 @@ class ContactNotification {
     private $renderer;
     
     
-    public function __construct(\Swift_Mailer $mailer, Environment $renderer,
-        TokenGeneratorInterface $tokenGenerator)
+    /**
+     *@var ParameterBagInterface
+     */
+    private $parameters;
+    
+    
+    public function __construct(\Swift_Mailer $mailer, Environment $renderer, ParameterBagInterface $parameters)
     {
         $this->mailer = $mailer;
-        $this->renderer = $renderer; 
-    }
+        $this->renderer = $renderer;
+        $this->parameters = $parameters;
+    } 
     
-    public function notify (User $user) {
+    public function notify (User $user) 
+    {
+        $appUrl = $this->parameters->get('app.url');
         $message = (new \Swift_Message('Confirmation : ' . $user->getUsername()))
             ->setSubject('Envoi de mail TEST AD-INSTALLATIONS')
-            ->setFrom('y.aabidouche@gmail.com')
-            ->setTo('y.aabidouche@gmail.com')
+            ->setFrom($this->parameters->get('app.email.noreply'))
+            ->setTo($user->getEmail())
             ->setBody(
                 $this->renderer->render('email/modele-mail.html.twig', [
-                    'user' => $user
+                    'user' => $user,
+                    'appUrl' => $appUrl
                 ]), 'text/html'
         );
         // Envoi du mail
@@ -45,31 +53,4 @@ class ContactNotification {
 //        ]);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -51,7 +51,7 @@ security:
             provider: app_user_provider
             guard:
                 authenticators:
-                    - App\Security\TokenAuthenticator         
+                    - App\Security\AppAuthenticator         
             stateless: true
 
             # activate different ways to authenticate

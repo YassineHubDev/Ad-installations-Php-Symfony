@@ -70,7 +70,12 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
+        
+        } else if(!$user->isActive()) {
+            throw new CustomUserMessageAuthenticationException('User is not active, please active your account.');
         }
+            
+        
         return $user;
     }
     

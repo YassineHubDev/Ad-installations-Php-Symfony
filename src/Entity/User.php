@@ -52,32 +52,18 @@ class User implements UserInterface
      */
     private $username;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $apiToken;
-    
-    
-     /**
-      * @var string le token qui servira lors de l'oubli de mot de passe
-      * @ORM\Column(type="string", length=255, nullable=true)
-      */
-    protected $resetToken;
-    
-    
-    
-    public function isApiTokenValid()
-    {
-        return $this->apiToken == $this->generateApiToken();
-    }
 
-    public function __construct()
-{
-    // By doing that, the apiToken is not encrypted in the database.
-    // You should consider using the PasswordEncoder to encode/verify the apiToken
-    $this->apiToken = bin2hex(random_bytes(20));
-}
- 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active = false;
+    
+    
     
     
     //GETTER & SETTER
@@ -190,18 +176,10 @@ class User implements UserInterface
 
         return $this;
     }
-
-    public function getApiToken(): ?string
-    {
-        return $this->apiToken;
-    }
-
-    public function setApiToken(?string $apiToken): self
-    {
-        $this->apiToken = $apiToken;
-
-        return $this;
-    }
+    
+    
+    
+    
     
     
     public function setConfirmationToken($confirmationToken)
@@ -211,20 +189,22 @@ class User implements UserInterface
         return $this;
     }
     
-     /**
-      * @return string
-      */
-    public function getResetToken(): string
+
+    public function getConfirmationToken(): ?string
     {
-        return $this->resetToken;
+        return $this->confirmationToken;
     }
 
-    /**
-     * @param string $resetToken
-     */
-    public function setResetToken(?string $resetToken): void
+    public function isActive(): ?bool
     {
-        $this->resetToken = $resetToken;
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 
 

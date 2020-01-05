@@ -5,8 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationMagType;
-use App\Security\TokenAuthenticator;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use App\Security\AppAuthenticator;
 use App\Notification\ContactNotification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,13 +38,13 @@ class AuthController extends AbstractController
      * @param AppAuthenticator $authenticator
      * @return Response
      */
-    public function register(Request $request, ContactNotification $notification, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, TokenAuthenticator $tokenAuthenticator, TokenGeneratorInterface $tokenGenerator): Response
+    public function register(Request $request, ContactNotification $notification, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $notification->notify($user);
+           
             $datas = $request->request->get('registration_form', []);
             if (array_key_exists('roles', $datas)) {
                 $user->setRoles([$datas['roles']]);
@@ -57,16 +56,14 @@ class AuthController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-                        
+            
+            $user->setConfirmationToken(bin2hex(random_bytes(60)));
+                                       
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             
-            $email = $user->getEmail();
-            $username = $user->getUsername();
-            $mailerService->sendApiToken($mailer, $apiToken, $email, $username, 'registration.html.twig');
-            
-            
+            $notification->notify($user);
             
             // do anything else you need here, like send an email
             return $guardHandler->authenticateUserAndHandleSuccess(
