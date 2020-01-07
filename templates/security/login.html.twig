@@ -4,6 +4,9 @@
 
 {% block body %}
 <br> <br> <br> <br>  
+
+<main class="container">
+
 <!-- Default form login -->
 <form action="{{ path('app_login') }}" method="post">
     {% if error %}
@@ -11,21 +14,22 @@
     {% endif %}
    
     
-
+<h1 class="titrespe">Connectez-vous à votre espace.</h1>
 
 <!--    <p class="h4 mb-4">Connectez-vous</p>-->
 <div id="page_login">
+    
     <!-- Email -->
     <div>
         <label for="inputEmail" ></label>
-        <input class="form-control mb-4" type="text" id="username" name="_username" placeholder="Email" required="required" value="{{ last_username }}" required autofocus>
+        <input class="form-control mb-4" type="text" id="email" name="email" placeholder="Email" required="required" value="{{ last_username }}" required autofocus>
     </div>
     
    
     <!-- Password -->
     <div>
         <label for="inputPassword"></label>
-        <input type="password" id="inputPassword" class="form-control mb-4" name="_password" placeholder="Mot de passe" required>
+        <input type="password" id="inputPassword" class="form-control mb-4" name="password" placeholder="Mot de passe" required>
     </div>
     
     <input type="hidden" name="_csrf_token"
@@ -39,11 +43,7 @@
                 <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi </label>
             </div>
         </div>
-            
-        
-        
-        
-        
+             
         
         <div>
             <!-- Forgot password -->
@@ -61,6 +61,7 @@
 </div>
 </form>
 
+</main>
 
 <br> <br> <br> <br> 
 <!-- Default form login -->

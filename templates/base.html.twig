@@ -10,12 +10,15 @@
     <meta name="description" content="AD-INSTALLATIONS : spécialiste de la pose et montage de cuisines, salles de bain et placards, en île de France, par des installateurs professionnels dotés de 40 ans d'expérience.">
     {% block stylesheets %}
        {{ encore_entry_link_tags ( 'app' ) }}
-       {{ encore_entry_link_tags ( 'bootstrap.min' ) }}
+<!--       {{ encore_entry_link_tags ( 'bootstrap.min' ) }}-->
        {{ encore_entry_link_tags ( 'jquery.fancybox.min' ) }}
-       {{ encore_entry_link_tags ( 'index' ) }}
+<!--       {{ encore_entry_link_tags ( 'index' ) }}-->
        {{ encore_entry_link_tags ( 'parallax' ) }}
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/index.css">
         <link href="https://fonts.googleapis.com/css?family=Hind+Madurai:700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Mukta+Malar&display=swap" rel="stylesheet"> 
+        <link rel="shortcut icon" type="image/png" href="img/upload/logo/favicon.png"/>
     {% endblock %}
 </head>
 
@@ -35,21 +38,24 @@
 
 {% block javascripts %}
    {{ encore_entry_script_tags ( 'app' ) }}
-   {{ encore_entry_script_tags ( 'jquery-3.4.1.min' ) }}
-   {{ encore_entry_script_tags ( 'bootstrap.bundle.min' ) }}
-   {{ encore_entry_script_tags ( 'parallax' ) }}
-   {{ encore_entry_script_tags ( 'jquery.fancybox.min_1' ) }}
-   {{ encore_entry_script_tags ( 'core' ) }}
-   {{ encore_entry_script_tags ( 'fullscreen' ) }}
-   {{ encore_entry_script_tags ( 'guestures' ) }}
-   {{ encore_entry_script_tags ( 'hash' ) }}
-   {{ encore_entry_script_tags ( 'media' ) }}
-   {{ encore_entry_script_tags ( 'modal-redirect' ) }}
-   {{ encore_entry_script_tags ( 'share' ) }}
-   {{ encore_entry_script_tags ( 'slideshow' ) }}
-   {{ encore_entry_script_tags ( 'thumbs' ) }}
-   {{ encore_entry_script_tags ( 'wheel' ) }}
-   
+ 
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="/js/core.js"></script>
+    <script src="/js/fullscreen.js"></script>
+    <script src="/js/guestures.js"></script>
+    <script src="/js/hash.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/jquery.fancybox.min.js"></script>
+    <script src="/js/wheel.js"></script>
+    <script src="/js/media.js"></script>
+    <script src="/js/modal-redirect.js"></script>
+    <script src="/js/parallax.js"></script>
+    <script src="/js/share.js"></script>
+    <script src="/js/slideshow.js"></script>
+    <script src="/js/thumbs.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 {% endblock %}
 
@@ -105,14 +111,14 @@
     
     
      function effacer() {
-     document.getElementById("app_user_registration_raisonSociale").disabled = true;
-     document.getElementById("app_user_registration_raisonSociale").removeAttribute("required");    
+     document.getElementById("registration_form_raisonSociale").disabled = true;
+     document.getElementById("registration_form_raisonSociale").removeAttribute("required");    
      }
         
     
     function afficher() {
-    document.getElementById("app_user_registration_raisonSociale").disabled = false;
-    document.getElementById("app_user_registration_raisonSociale").setAttribute("required", "");
+    document.getElementById("registration_form_raisonSociale").disabled = false;
+    document.getElementById("registration_form_raisonSociale").setAttribute("required", "");
     
     }
     

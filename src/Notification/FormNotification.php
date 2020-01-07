@@ -2,11 +2,12 @@
 
 namespace App\Notification;
 
-use App\Entity\User;
+use App\Entity\Client;
+use App\Entity\Magasin;
 use Twig\Environment;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class ContactNotification {
+class FormNotification {
     
     /**
      *@var \Swift_Mailer
@@ -33,17 +34,15 @@ class ContactNotification {
         $this->parameters = $parameters;
     } 
     
-    public function notify (User $user) 
+    public function notify2 (Client $client) 
     {
-        $appUrl = $this->parameters->get('app.url');
-        $message = (new \Swift_Message('Confirmation : ' . $user->getUsername()))
-            ->setSubject('Confirmation de votre compte')
+        $message = (new \Swift_Message('Devis : ' . $client->getSujet()))
+            ->setSubject('Demande de devis')
             ->setFrom($this->parameters->get('app.email.noreply'))
-            ->setTo($user->getEmail())
+            ->setTo('futurdev@protonmail.com')
             ->setBody(
-                $this->renderer->render('email/modele-mail.html.twig', [
-                    'user' => $user,
-                    'appUrl' => $appUrl
+                $this->renderer->render('email/modele-form.html.twig', [
+                    'client' => $client,
                 ]), 'text/html'
         );
         // Envoi du mail

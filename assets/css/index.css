@@ -528,14 +528,16 @@ legend {
 
 
 /*FORM-CLIENT*/
+/*
 #page_login {
-    margin: 60px 0 5px 0;
+    margin: 60px 0 5px 10%;
     padding: 22px 22px 22px 22px;
     text-align: justify;
     border: 1px solid black !important;
-    width: 100%;
+    width: 80%;
     font-size: 14px;
 }
+*/
 
 /* MENTIONS MEGALES*/ 
 .mentions_leg {

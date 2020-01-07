@@ -66,6 +66,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
+       
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) {
             // fail authentication with a custom error
@@ -92,9 +93,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         $user = $this->security->getUser();
         $roles = $user->getRoles();
         if (in_array('ROLE_CLIENT', $roles)) {
-            return new RedirectResponse($this->urlGenerator->generate('app_form_client'));
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         } elseif (in_array('ROLE_MAGASIN', $roles)) {
-            return new RedirectResponse($this->urlGenerator->generate('app_form_magasin'));
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         } else {
             throw new \Exception('Tu n\'est ni un client ni un magasin, qui es-tu donc ?');
         }

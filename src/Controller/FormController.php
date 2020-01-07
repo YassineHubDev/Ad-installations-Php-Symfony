@@ -8,21 +8,24 @@ use App\Entity\Client;
 use App\Entity\Magasin;
 use App\Form\ClientFormType;
 use App\Form\MagFormType;
+use App\Notification\FormNotification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 class FormController extends AbstractController
 {
     /**
      * @Route("/form-client", name="app_form_client")
      * @param Request $request
-     * @param UserInterface $user
+     * @param User $user
      * @return Response
      */
-    public function formClient(Request $request, UserInterface $user): Response
+    public function formClient(Request $request, FormNotification $notification, TokenStorageInterface $tokenStorage): Response
     {
         $client = new Client();
         $form = $this->createForm(ClientFormType::class, $client);
@@ -30,11 +33,13 @@ class FormController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
         
-
+            $user = $tokenStorage->getToken()->getUser();
             $client->setPublisher($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($client);
             $entityManager->flush();
+            
+            $notification->notify2($client);
             
             $this->addFlash(
                 'notice',
@@ -53,10 +58,10 @@ class FormController extends AbstractController
     /**
      * @Route("/form-magasin", name="app_form_magasin")
      * @param Request $request
-     * @param UserInterface $user
+     * @param User $user
      * @return Response
      */
-    public function formMag(Request $request, UserInterface $user): Response
+    public function formMag(Request $request, TokenStorageInterface $tokenStorage): Response
     {
 
         $magasin = new Magasin();
@@ -65,10 +70,14 @@ class FormController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $user = $tokenStorage->getToken()->getUser();
             $magasin->setPublisher($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($magasin);
             $entityManager->flush();
+            
+            $notification->notify2($user);
+
 
             $this->addFlash(
                 'notice',

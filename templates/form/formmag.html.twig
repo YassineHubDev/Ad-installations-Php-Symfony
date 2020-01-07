@@ -5,14 +5,17 @@
 {% block body %}
 
     {{ form_start(magForm) }}
-aaaaaaaa
+<br>
+<br>
+<br>
+<br>
 
-<div id="titre_projet">
-    <h2>Faites-nous part de votre projet !</h2>
-</div>
+<main class="container">
+
+<h1 class="titrespe">Faites-nous part de votre projet !</h1>
 
 <section id="sectionformmag">
-    <div id="page_login">
+    <div id="page_login2">
     {{ form_row(magForm.sujet, {'label' : false}) }}
     {{ form_errors(magForm.sujet) }}
     {{ form_widget(magForm.sujet) }}
@@ -31,11 +34,15 @@ aaaaaaaa
         
       
     {{ form_widget(magForm) }}
-      <button type="submit" class="btn btn-primary" value="Register">Soumettre</button>
+      <input type="submit" class="btn btn-lg btn-primary" value="Soumettre">
     {{ form_end(magForm) }}
     
     </div>
 </section>
+
+</main>
+
+<br> <br> <br> <br>
 {% endblock %}
 
 

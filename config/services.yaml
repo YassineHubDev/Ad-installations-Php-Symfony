@@ -7,7 +7,7 @@ parameters:
     app.path.client: /uploads/images/client
     app.path.magasin: /uploads/images/magasin
     app.url: http://ad-installations/
-    app.email.noreply: contact@ad-installations.fr
+    app.email.noreply: y.aabidouche@gmail.com
 
 
 services:

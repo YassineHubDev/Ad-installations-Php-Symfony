@@ -49,34 +49,9 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-            
-            
-//            ->add('plainPassword', RepeatedType::class, array(
-//                'type' => PasswordType::class,
-//                'options' => array(
-//                    'translation_domain' => 'FOSUserBundle',
-//                    'attr' => array(
-//                        'autocomplete' => 'new-password',
-//                    ),
-//                ),
-//                'first_options'   => array('attr' => array('placeholder' => 'Mot de passe')),
-//                'second_options'  => array('attr' => array('placeholder' => 'Répétez le mot de passe',)),
-//                'invalid_message' => 'fos_user.password.mismatch',
-//                'constraints' => [
-//                    new NotBlank([
-//                        'message' => 'Veuillez rentrer un mot de passe',
-//                    ]),
-//                    new Length([
-//                        'min' => 6,
-//                        'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères',
-//                        // max length allowed by Symfony for security reasons
-//                        'max' => 4096,
-//                    ]),
-//                ],
-//            ))
-            
-            ->add('roles', ChoiceType::class, [
+            ])      
+
+             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Magasin' => 'ROLE_MAGASIN',
                     'Client' => 'ROLE_CLIENT',

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationMagType;
 use App\Security\AppAuthenticator;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class AuthController extends AbstractController
 {
@@ -38,7 +40,9 @@ class AuthController extends AbstractController
      * @param AppAuthenticator $authenticator
      * @return Response
      */
-    public function register(Request $request, ContactNotification $notification, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
+    public function register(Request $request, 
+                            ContactNotification $notification, 
+                            UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -62,60 +66,60 @@ class AuthController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            
+        
             $notification->notify($user);
+
+            $this->addFlash(
+                'notice',
+                'Un e-mail de confirmation vient de vous être envoyé.'
+            );
+
+            return $this->redirectToRoute('app_home');
+    
             
             // do anything else you need here, like send an email
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+           
         }
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/activate-user/{email}", name="app_activate_user")
+     * @param Request $request
+     * @return Response
+     */
+    public function activateUser(User $user, 
+                                Request $request, 
+                                UserRepository $userRepository, 
+                                GuardAuthenticatorHandler $guardHandler, 
+                                AppAuthenticator $authenticator) 
+    {
+        $isValidConfirmationToken = $userRepository->isValidConfirmationToken($request->query->get('confirmationToken'), $user->getEmail());
+
+        $lastUsername = $user->getUsername();
+
+        if ($isValidConfirmationToken) {
+            $user->setActive(true);
+            $user->setConfirmationToken(null);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
+            $this->addFlash('success', 'Félicitations ! Votre compte est maintenant activé.');
+             return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+        } else {
+            $this->addFlash('warning', 'Token invalid'); 
+        }
+
+        return $this->redirectToRoute('app_home');
+
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

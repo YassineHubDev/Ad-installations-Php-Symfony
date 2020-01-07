@@ -19,7 +19,7 @@ class ClientFormType extends AbstractType
         $builder
             
             ->add('sujet', null, array ('attr' => array('placeholder' => 'Sujet')))            
-            ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message')))
+            ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message...')))
             ->add('imageFile', VichImageType::class)
             
             ;

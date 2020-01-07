@@ -18,7 +18,7 @@ class MagFormType extends AbstractType
             
             ->add('sujet', null, array ('attr' => array('placeholder' => 'Sujet')))
             ->add('telephone', null, array ('attr' => array('placeholder' => 'Téléphone')))
-            ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message')))
+            ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message...')))
             ->add('imageFile', VichImageType::class)
             ;
         

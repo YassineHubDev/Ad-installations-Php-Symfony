@@ -3,18 +3,21 @@
 {% block title %}Votre projet{% endblock %}
 
 {% block body %}
+<br>
+<br>
+<br>
+<br>
+
+<main class="container">
 
 {{ form_start(clientForm) }}
-lllllllpopo
 
-<div id="titre_projet">
-    <h2>Faites-nous part de votre projet !</h2>
-</div>
+    <h1 class="titrespe">Faites-nous part de votre projet !</h1>
     
 <section id="sectionformmag">
    
    
-    <div id="page_login">
+    <div id="page_login2">
     {{ form_row(clientForm.sujet, {'label' : false}) }}
     {{ form_errors(clientForm.sujet) }}
     {{ form_widget(clientForm.sujet) }}
@@ -28,10 +31,14 @@ lllllllpopo
     {{ form_widget(clientForm.imageFile) }}
     
     {{ form_widget(clientForm) }}
-        <input type="submit" class="btn btn-lg btn-primary" value="Register">
+        <input type="submit" class="btn btn-lg btn-primary" value="Soumettre">
     {{ form_end(clientForm) }}
     
 </div>
 </section>
+
+</main>
+
+<br> <br> <br> <br> 
 {% endblock %}
 

@@ -1,5 +1,8 @@
-   <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand text-white" href="/">AD-INSTALLATIONS</a>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="/">
+            <img class="facebook" src="img/upload/logo/logo_ad-installations.png" alt="logo_ad-installations">
+        </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,22 +14,22 @@
             </li> -->
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_cuisine') }}" tabindex="-1" aria-disabled="true">Cuisines</a>
+                <a class="nav-link text-dark" href="{{ path('app_cuisine') }}" tabindex="-1" aria-disabled="true">Cuisines</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_sdb') }}" tabindex="-1" aria-disabled="true">Salles de bain</a>
+                <a class="nav-link text-dark" href="{{ path('app_sdb') }}" tabindex="-1" aria-disabled="true">Salles de bain</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_placard') }}" tabindex="-1" aria-disabled="true">Placards</a>
+                <a class="nav-link text-dark" href="{{ path('app_placard') }}" tabindex="-1" aria-disabled="true">Placards</a>
             </li>
             
             
 
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('admin_index') }}">Administration</a>
+                    <a class="nav-link text-dark" href="{{ path('admin_index') }}">Administration</a>
                 </li>
             {% endif %}
 
@@ -34,13 +37,13 @@
 
             {% if is_granted('ROLE_MAGASIN') %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('app_form_magasin') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
+                    <a class="nav-link text-dark" href="{{ path('app_form_magasin') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
                 </li>
             {% endif %}
             
             {% if is_granted('ROLE_CLIENT') %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('app_form_client') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
+                    <a class="nav-link text-dark" href="{{ path('app_form_client') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
                 </li>
             {% endif %}
             
@@ -50,17 +53,17 @@
         <ul class="navbar-nav">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_home') }}">Profile</a>
+                <a class="nav-link text-dark" href="{{ path('app_home') }}">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_logout') }}">Déconnexion</a>
+                <a class="nav-link text-dark" href="{{ path('app_logout') }}">Déconnexion</a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_register') }}" tabindex="-1" aria-disabled="true">S'inscrire</a>
+                <a class="nav-link text-dark" href="{{ path('app_register') }}" tabindex="-1" aria-disabled="true">S'inscrire</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ path('app_login') }}" tabindex="-1" aria-disabled="true">Se connecter</a>
+                <a class="nav-link text-dark" href="{{ path('app_login') }}" tabindex="-1" aria-disabled="true">Se connecter</a>
             </li>
             {% endif %}
         </ul>

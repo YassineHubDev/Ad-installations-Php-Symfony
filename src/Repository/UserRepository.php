@@ -36,15 +36,17 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
+    
+    public function isValidConfirmationToken($confirmationToken, $email)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->Select('u.confirmationToken')
+            ->Where('u.confirmationToken = :confirmationToken')
+            ->AndWhere('u.email = :email')
+            ->setParameters(['confirmationToken' => $confirmationToken, 'email' => $email])
+            ->getQuery();
+
+        return count($queryBuilder->getResult()) === 1 ? true : false;
+    
     }
-    */
 }

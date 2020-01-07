@@ -5,11 +5,15 @@ security:
 
     
     role_hierarchy:
-        ROLE_MAGASIN: ROLE_USER
-        ROLE_CLIENT: ROLE_USER
+        ROLE_MAGASIN: 
+             - ROLE_USER
+             - ROLE_MAGASIN
+        ROLE_CLIENT: 
+             - ROLE_USER
+             - ROLE_CLIENT
         ROLE_ADMIN:
-            - ROLE_MAGASIN
-            - ROLE_CLIENT
+             - ROLE_MAGASIN
+             - ROLE_CLIENT
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -52,7 +56,7 @@ security:
             guard:
                 authenticators:
                     - App\Security\AppAuthenticator         
-            stateless: true
+            stateless: false
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
