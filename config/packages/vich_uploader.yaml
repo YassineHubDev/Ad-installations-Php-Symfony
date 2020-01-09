@@ -2,10 +2,55 @@ vich_uploader:
     db_driver: orm
 
     mappings:
-        client:
-            uri_prefix:         '%app.path.client%'
+        client_images:
+            uri_prefix:         /images/client
             upload_destination: '%kernel.project_dir%/public/images/client'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
             
-        magasin:
-            uri_prefix:         '%app.path.magasin%'
+        magasin_images:
+            uri_prefix:         /images/magasin
             upload_destination: '%kernel.project_dir%/public/images/magasin'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            
+            
+        client_pdf:
+            uri_prefix:         /pdf/client
+            upload_destination: '%kernel.project_dir%/public/pdf/client'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            
+        magasin_pdf:
+            uri_prefix:         /pdf/magasin
+            upload_destination: '%kernel.project_dir%/public/pdf/magasin'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

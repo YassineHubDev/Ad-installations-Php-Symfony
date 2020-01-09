@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File ;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -62,7 +63,13 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $active = false;
-    
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $resetToken;
+
+
     
     
     
@@ -207,5 +214,16 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken($resetToken)
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
 
 }

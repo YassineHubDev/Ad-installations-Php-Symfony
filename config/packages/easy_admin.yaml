@@ -3,30 +3,48 @@ easy_admin:
         # List the entity class name you want to manage
         User:
             class: App\Entity\User
-#            form:
-#                fields:
-#                    - Nom
-#                    - Prenom
-#                    - Adresse
-#                    - Email
-#                    - Password
-#                    - Clients
-#                    - Magasins
+            form:
+                fields:
+                    - "username"
+                    - "email"
+                    - "raisonSociale"
+                    - "ville"
+                    - "password"
+                    -  property: 'roles'
+                       type: 'choice'
+                       type_options:
+                           mapped: true
+                           expanded: true
+                           multiple: true
+                           choices: { 'CLIENT': 'ROLE_CLIENT', 'MAGASIN': 'ROLE_MAGASIN' }
+                    - property: 'password'
+                      type: 'repeated'
+                      type_options:
+                           type: Symfony\Component\Form\Extension\Core\Type\PasswordType
+                           required: true
+                           first_options: { label: 'MDP 1' }
+                           second_options: { label: 'MDP 2' }
+                    - "confirmationToken"
             
         Client:
             class: App\Entity\Client
             form:
                 fields:
-                    - { property: 'imageFile', type: 'vich_image' }
-                    - { property: 'contractFile', type: 'vich_file' }
+                    - "sujet"
+                    - "projet"
+                    - { property: 'imageFile', type: 'file' }
+                    - { property : 'pdfFile' ,  type : 'vich_file' }
             list:
                 fields:
-                    - { property: 'image', type: 'image', base_path: '%app.path.client%' }
-                    - contract
-                    - { property: 'contract', template: 'contract.html.twig', base_path: '%app.path.client%' }
+                    - "sujet"
+                    - "projet"
+                    - { property: 'image', type: 'image', base_path: '%app.path.client_images%' }
+                    - { property : 'pdf' ,  template : 'pdf.html.twig' ,  base_path : '%app.path.client_pdf%' }
+                    
             show:
                 fields:
-                    - { property: 'image', type: 'image', base_path: '%app.path.client%' } 
+                    - { property: 'image', type: 'image', base_path: '%app.path.client_images%' } 
+                    - { property : 'pdf' ,  template : 'pdf.html.twig' ,  base_path : '%app.path.client_pdf%' }
             
                     
                     
@@ -34,16 +52,20 @@ easy_admin:
             class: App\Entity\Magasin
             form:
                 fields:
-                    - { property: 'imageFile', type: 'vich_image' }
-                    - { property: 'contractFile', type: 'vich_file' }
+                    - "sujet"
+                    - "projet"
+                    - { property: 'imageFile', type: 'file' }
+                    - { property: 'pdfFile',  type: 'vich_file' }
             list:
                 fields:
-                    - { property: 'image', type: 'image', base_path: '%app.path.magasin%' }
-                    - contract
-                    - { property: 'contract', template: 'contract.html.twig', base_path: '%app.path.magasin%' }
+                    - "sujet"
+                    - "projet"
+                    - { property: 'image', type: 'image', base_path: '%app.path.magasin_images%' }
+                    - { property: 'pdf',  template: 'pdf.html.twig',  base_path: '%app.path.magasin_pdf%' }
             show:
                 fields:
-                     - { property: 'image', type: 'image', base_path: '%app.path.magasin%' } 
+                    - { property: 'image', type: 'image', base_path: '%app.path.magasin_images%' }
+                    - { property: 'pdf',  template: 'pdf.html.twig',  base_path: '%app.path.magasin_pdf%' }
             
     site_name: 'AD-INSTALLATIONS'
     

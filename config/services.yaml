@@ -4,10 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    app.path.client: /uploads/images/client
-    app.path.magasin: /uploads/images/magasin
+    app.path.client_images: /uploads/images/client
+    app.path.client_pdf : /uploads/pdf/client
+    app.path.magasin_images: /uploads/images/magasin
+    app.path.magasin_pdf : /uploads/pdf/magasin
     app.url: http://ad-installations/
-    app.email.noreply: y.aabidouche@gmail.com
+    app.email.noreply: test.doranco2020@gmail.com
 
 
 services:

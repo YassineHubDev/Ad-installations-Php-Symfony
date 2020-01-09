@@ -34,14 +34,20 @@ class Client
     private $publisher;
     
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filename;
+    
+    /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="client", fileNameProperty="image")
-     * @var File
+     * @Vich\UploadableField(mapping="client_images", fileNameProperty="filename")
+     * @var File|null
      */
     private $imageFile;
 
@@ -55,13 +61,34 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $sujet;
-    
-    
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $pdf;
+
+    /**
+     * @Vich\UploadableField(mapping="client_pdf", fileNameProperty="pdf")
+     * @var File
+     */
+    private $pdfFile;
+
+        
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->updateAt = new \Datetime();
     }
 
+    
+    
+    
+    
+    
+    
+    
+    //GETTER & SETTER//
 
     public function getId(): ?int
     {
@@ -93,6 +120,10 @@ class Client
         return $this;
     }
     
+    
+    
+    
+    
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -116,19 +147,61 @@ class Client
         $this->image = $image;
     }
 
+    
+    
     public function getImage()
     {
         return $this->image;
     }
 
+    
+    
     public function getSujet(): ?string
     {
         return $this->sujet;
     }
 
+    
+    
     public function setSujet(string $sujet): self
     {
         $this->sujet = $sujet;
+
+        return $this;
+    }
+
+    public function getPdf(): ?string
+    {
+        return $this->pdf;
+    }
+
+    public function setPdf(string $pdf): self
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    public function getPdfFile(): ?string
+    {
+        return $this->pdfFile;
+    }
+
+    public function setPdfFile(string $pdfFile): self
+    {
+        $this->pdfFile = $pdfFile;
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

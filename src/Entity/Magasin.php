@@ -37,14 +37,20 @@ class Magasin
     private $projet;
     
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $filename;
+    
+    /**
      * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $image;
     
     /**
-     * @Vich\UploadableField(mapping="magasin", fileNameProperty="image")
-     * @var File
+     * @Vich\UploadableField(mapping="magasin_images", fileNameProperty="filename")
+     * @var File|null
      */
     private $imageFile;
     
@@ -60,18 +66,24 @@ class Magasin
      * @ORM\JoinColumn(nullable=false)
      */
     private $publisher;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var File
+     */
+    private $pdf;
+
+     /**
+     * @Vich\UploadableField(mapping="magasin_pdf", fileNameProperty="filename")
+     * @var File
+     */
+    private $pdfFile;
+
     
-//    /**
-//     * @ORM\Column(type="string", length=255)
-//     * @var string
-//     */
-//    private $contract;
-//    
-//    /**
-//     * @Vich\UploadableField(mapping="magasin", fileNameProperty="contract")
-//     * @var File
-//     */
-//    private $contractFile;
+    
+
+    
+    
 
     public function __construct()
     {
@@ -199,6 +211,42 @@ class Magasin
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function getPdf(): ?string
+    {
+        return $this->pdf;
+    }
+
+    public function setPdf(string $pdf): self
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    public function getPdfFile(): ?string
+    {
+        return $this->pdfFile;
+    }
+
+    public function setPdfFile(string $pdfFile): self
+    {
+        $this->pdfFile = $pdfFile;
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
+
+        return $this;
     }
     
 }

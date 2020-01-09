@@ -43,7 +43,7 @@ class FormController extends AbstractController
             
             $this->addFlash(
                 'notice',
-                'Votre formulaire a bien été envoyé !'
+                'Votre message a bien été envoyé ! L\'équipe AD-INSTALLATIONS vous répondra dans les plus brefs délais.'
             );
             return $this->redirectToRoute('app_home');
             
@@ -61,7 +61,7 @@ class FormController extends AbstractController
      * @param User $user
      * @return Response
      */
-    public function formMag(Request $request, TokenStorageInterface $tokenStorage): Response
+    public function formMag(Request $request, TokenStorageInterface $tokenStorage, FormNotification $notification): Response
     {
 
         $magasin = new Magasin();
@@ -76,12 +76,12 @@ class FormController extends AbstractController
             $entityManager->persist($magasin);
             $entityManager->flush();
             
-            $notification->notify2($user);
+            $notification->notify1($magasin);
 
 
             $this->addFlash(
                 'notice',
-                'Votre formulaire a bien été envoyé ! '
+                'Votre message a bien été envoyé ! L\'équipe AD-INSTALLATIONS vous répondra dans les plus brefs délais.'
             );
             return $this->redirectToRoute('app_home');
 

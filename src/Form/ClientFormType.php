@@ -20,7 +20,9 @@ class ClientFormType extends AbstractType
             
             ->add('sujet', null, array ('attr' => array('placeholder' => 'Sujet')))            
             ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message...')))
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', VichImageType::class, [
+                'required' => false
+            ])
             
             ;
             

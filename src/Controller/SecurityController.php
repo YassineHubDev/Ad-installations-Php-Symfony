@@ -3,14 +3,18 @@
 
 namespace App\Controller;
 
-
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\HttpFoundation\Request;
+use App\Notification\FormNotification;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Security\TokenAuthenticator;
 
 
@@ -63,9 +67,15 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
      /**
       * @Route("/forgotten_password", name="app_forgotten_password")
       */
-    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenAuthenticator $tokenAuthenticator): Response
+    public function forgottenPassword(
+                                    Request $request, 
+                                    UserPasswordEncoderInterface $encoder, 
+                                    \Swift_Mailer $mailer, 
+                                    TokenGeneratorInterface $tokenGenerator,
+                                    FormNotification $notification
+                                    ): Response
     {
-
+        
         if ($request->isMethod('POST')) {
 
             $email = $request->request->get('email');
@@ -75,8 +85,8 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
             /* @var $user User */
 
             if ($user === null) {
-                $this->addFlash('danger', 'Email Inconnu');
-                return $this->redirectToRoute('app_home');
+                $this->addFlash('danger', 'Veuillez saisir l\'adresse email renseignée lors de votre inscription.');
+                return $this->redirectToRoute('app_forgotten_password');
             }
             $token = $tokenGenerator->generateToken();
 
@@ -89,24 +99,19 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
             }
 
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+                        
+            $notification->notify3($user);
+            
 
-            $message = (new \Swift_Message('Mot de passe oublié'))
-                ->setFrom('y.aabidouche@gmail.com')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    "blablabla voici le token pour reseter votre mot de passe : " . $url,
-                    'text/html'
-                );
-
-            $mailer->send($message);
-
-            $this->addFlash('notice', 'E-mail envoyé');
+            $this->addFlash('notice', 'Un mail vous a été envoyé pour la modification de votre mot de passe.');
 
             return $this->redirectToRoute('app_home');
         }
 
         return $this->render('security/forgotten_password.html.twig');
     }
+    
+    
     
     
     /**
@@ -130,7 +135,7 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Mot de passe mis à jour');
+            $this->addFlash('notice', 'Votre mot de passe a été mis à jour.');
 
             return $this->redirectToRoute('app_home');
         }else {
