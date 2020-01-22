@@ -24,7 +24,7 @@ class EditRoleUserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true
             ])
-        ;
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,8 +1,6 @@
 <?php
 // src/App/Form/RegistrationFormType.php
-
 namespace App\Form;
-
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -17,20 +15,19 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
+
         $builder
             ->add('email', null, array ('label' => false))
-            ->add('username', null, array ('attr' => array('placeholder' => 'Nom')))
+            ->add('username', null, array ('attr' => array('placeholder' => 'Nom'), 'required' => true))
             ->add('ville', null, array ('attr' => array('placeholder' => 'Ville')))
             ->add('raisonSociale', TextType::class, array ('attr' => array('placeholder' => 'Magasin'), 'required' => true))
-            
-    
-             ->add('plainPassword', RepeatedType::class, [
+
+
+            ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -51,7 +48,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])      
 
-             ->add('roles', ChoiceType::class, [
+            ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Magasin' => 'ROLE_MAGASIN',
                     'Client' => 'ROLE_CLIENT',
@@ -60,10 +57,9 @@ class RegistrationFormType extends AbstractType
                 'expanded' => true,
                 'mapped' => false
             ])
-  
-        ;
-    }
 
+            ;
+    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

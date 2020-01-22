@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,14 +21,16 @@ class Magasin
      * @ORM\Column(type="integer")
      */
     private $id;
-    
-/**
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $sujet;
-    
+
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex(
+            pattern ="/^((\+)33|0|0033)[1-9](\d{2}){4}$/", message="numéro non valide")
      */
     private $telephone;
 
@@ -35,60 +38,56 @@ class Magasin
      * @ORM\Column(type="text", nullable=true)
      */
     private $projet;
-    
+
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $filename;
-    
-    /**
-     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $image;
-    
+
     /**
-     * @Vich\UploadableField(mapping="magasin_images", fileNameProperty="filename")
+     * @Vich\UploadableField(mapping="magasin_images", fileNameProperty="image")
      * @var File|null
      */
     private $imageFile;
-    
-    
+
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
     private $updatedAt;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="magasins")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="magasin")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $publisher;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var File
      */
     private $pdf;
 
-     /**
-     * @Vich\UploadableField(mapping="magasin_pdf", fileNameProperty="filename")
+    /**
+     * @Vich\UploadableField(mapping="magasin_pdf", fileNameProperty="pdf")
      * @var File
      */
     private $pdfFile;
 
-    
-    
 
-    
-    
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
     }
+    
+    
+    
+    
+    
+    //GETTER & STTER//
 
     public function getId(): ?int
     {
@@ -172,7 +171,7 @@ class Magasin
     {
         return $this->ville;
     }
-    
+
     public function getSujet(): ?string
     {
         return $this->sujet;
@@ -184,7 +183,7 @@ class Magasin
 
         return $this;
     }
-    
+
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -237,16 +236,4 @@ class Magasin
         return $this;
     }
 
-    public function getFilename(): ?string
-    {
-        return $this->filename;
-    }
-
-    public function setFilename(?string $filename): self
-    {
-        $this->filename = $filename;
-
-        return $this;
-    }
-    
 }

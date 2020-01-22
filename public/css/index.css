@@ -9,7 +9,6 @@
     position: fixed;
     width: 100%;
     z-index: 10;
-    
 }
 
 ul li {
@@ -30,6 +29,12 @@ ul li {
     height: auto
 }
 
+.photo-opacity2 {
+    margin-top: 65px;
+    max-width: 100%;
+    height: auto
+}
+
 .scroll{
     display: flex;
     position: absolute;
@@ -46,7 +51,7 @@ img {
 .titreh3 {
     color: white;
     display: flex;
-/*    font-family: 'Hind Madurai', sans-serif;*/
+    font-family: 'Raleway', sans-serif;
     font-size: 1.9vw;
     text-align: center;
     position: absolute;
@@ -58,14 +63,14 @@ img {
 
 .devis {
     display: flex;
-/*    font-family: 'Hind Madurai', sans-serif;*/
+    font-family: 'Raleway', sans-serif;
     font-size: 1.9vw;
     text-align: center;
     position: absolute;
     top: 70%;
     left: 50%;
     border: 1px solid white !important;
-/*    border-radius: 24px;*/
+    /*    border-radius: 24px;*/
     transform: translate(-50%, -50%);
     background-color: transparent;
     color: white;
@@ -88,13 +93,12 @@ img {
     bottom: 25%;
     width: 50%;
     height: 58%;
-    background-color: rgba(172,146,123,0.5);
+    background-color: rgba(105,105,105,0.5);
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     color: white;
-/*    box-shadow: 1px 1px 12px #555;*/
     max-width: 100%
 }
 
@@ -103,11 +107,12 @@ h2 {
     color: #8B4513;
     text-align: center;
     font-size: 25px;
+    font-family: 'Raleway', sans-serif;
 }
 
 /*QUI SOMMES NOUS ?*/
 .article2 {
-    padding-top: 60px;
+    padding-top: 30px;
     width: 100%;
     height: auto;
     text-align: justify;
@@ -120,8 +125,19 @@ h2 {
 }
 
 .titrespe {
-    font-family: 'Mukta Malar', sans-serif;
-    color: #8B4513
+    font-family: 'Raleway', sans-serif;    
+    position: absolute;
+    left: 23%;
+    bottom: 30%;
+    background-color: rgba(248, 249, 250, 0.7);
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    color: rgba(139, 69, 19);
+    max-width: 50%;
+    font-size: 4vw;
+    /*    font-weight: bold*/
 }
 
 
@@ -253,7 +269,8 @@ h2 {
 }
 
 .explications {
-    font-size: 16px
+    font-size: 16px;
+/*    padding-top: 30px*/
 }
 
 
@@ -273,13 +290,14 @@ h2 {
 }
 
 .testhover2 {
-    width: 70%;
+    width: 51%;
     overflow: hidden;
-    height: auto
+    height: 0%;
+    margin: auto;
 }
 
 .img_planSDB {
-    width: 123%;
+    width: 100%;
     height: auto;
     transition: 1s
 }
@@ -290,7 +308,7 @@ h2 {
 }
 
 .calque2 {
-    margin-top: 60px;
+    margin: auto;
     width: 333px;
     height: 368px;
     text-align: center;
@@ -339,10 +357,10 @@ fieldset {
     width: 100%;
     height: auto;
     margin: 0 auto;
-/*    margin-top: 50px;*/
+    /*    margin-top: 50px;*/
     margin-top: 0px;
 }
-        
+
 legend {
     font-size: 25px;
 }
@@ -405,6 +423,11 @@ legend {
 
 /*page login*/
 
+.titre_form {
+    font-family: 'Mukta Malar', sans-serif;
+    color: black
+}
+
 .test10 {
     width: 100%;
     height: auto;
@@ -422,7 +445,7 @@ legend {
 }
 
 .text-center1 {
-        margin-left: 1px;
+    margin-left: 1px;
 }
 
 .accueil_specialite {
@@ -431,7 +454,7 @@ legend {
 }
 
 .photo-opacity2 {
-/*    filter: opacity(50%);*/
+    /*    filter: opacity(50%);*/
     margin-top: 56px;
     max-width: 100%;
     height: auto
@@ -460,7 +483,7 @@ legend {
     width: 100%;
     height: auto;
     transition: 1s;
-    margin-top: -31px;
+    /*    margin-top: -31px;*/
 }
 
 .img_gal:hover {
@@ -648,3 +671,4 @@ textarea.form-control {
     font-family: 'Mukta Malar', sans-serif;
     font-size: 17px
 }
+

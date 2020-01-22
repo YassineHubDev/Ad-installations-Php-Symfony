@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    {{ form_start(magForm) }}
+{{ form_start(magForm) }}
 <br>
 <br>
 <br>
@@ -12,37 +12,33 @@
 
 <main class="container">
 
-<h1 class="titrespe">Faites-nous part de votre projet !</h1>
+    <h1 class="titre_form">Et si vous partagiez votre projet avec nous ?</h1>
 
-<section id="sectionformmag">
-    <div id="page_login2">
-    {{ form_row(magForm.sujet, {'label' : false}) }}
-    {{ form_errors(magForm.sujet) }}
-    {{ form_widget(magForm.sujet) }}
-    
-    {{ form_row(magForm.telephone, {'label' : false}) }}
-    {{ form_errors(magForm.telephone) }}
-    {{ form_widget(magForm.telephone) }}
-    
-    {{ form_row(magForm.projet, {'label' : false}) }}
-    {{ form_errors(magForm.projet) }}
-    {{ form_widget(magForm.projet) }}
-    
-    {{ form_row(magForm.imageFile, {'label' : false}) }}
-    {{ form_errors(magForm.imageFile) }}
-    {{ form_widget(magForm.imageFile) }}
-        
-      
-    {{ form_widget(magForm) }}
-      <input type="submit" class="btn btn-lg btn-primary" value="Soumettre">
-    {{ form_end(magForm) }}
-    
-    </div>
-</section>
+    <section id="sectionformmag">
+        <div id="page_login2">
+            {{ form_row(magForm.sujet, {'label' : false}) }}
+            {{ form_errors(magForm.sujet) }}
+            {{ form_widget(magForm.sujet) }}
 
+            {{ form_row(magForm.telephone, {'label' : false}) }}
+            {{ form_widget(magForm.telephone) }}
+
+            {{ form_row(magForm.projet, {'label' : false}) }}
+            {{ form_errors(magForm.projet) }}
+            {{ form_widget(magForm.projet) }}
+
+            {{ form_row(magForm.imageFile, {'label' : false}) }}
+            {{ form_errors(magForm.imageFile) }}
+            {{ form_widget(magForm.imageFile) }}
+
+
+            {{ form_widget(magForm) }}
+            <input type="submit" class="btn btn-lg btn-primary" value="Soumettre">
+            {{ form_end(magForm) }}
+
+        </div>
+    </section>
 </main>
 
 <br> <br> <br> <br>
 {% endblock %}
-
-

@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AuthController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/connexion", name="app_login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -32,8 +32,10 @@ class AuthController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/inscription", name="app_register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
@@ -41,14 +43,14 @@ class AuthController extends AbstractController
      * @return Response
      */
     public function register(Request $request, 
-                            ContactNotification $notification, 
-                            UserPasswordEncoderInterface $passwordEncoder): Response
+                             ContactNotification $notification, 
+                             UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-           
+
             $datas = $request->request->get('registration_form', []);
             if (array_key_exists('roles', $datas)) {
                 $user->setRoles([$datas['roles']]);
@@ -60,13 +62,13 @@ class AuthController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            
+
             $user->setConfirmationToken(bin2hex(random_bytes(60)));
-                                       
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-        
+
             $notification->notify($user);
 
             $this->addFlash(
@@ -75,10 +77,10 @@ class AuthController extends AbstractController
             );
 
             return $this->redirectToRoute('app_home');
-    
-            
+
+
             // do anything else you need here, like send an email
-           
+
         }
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
@@ -91,10 +93,10 @@ class AuthController extends AbstractController
      * @return Response
      */
     public function activateUser(User $user, 
-                                Request $request, 
-                                UserRepository $userRepository, 
-                                GuardAuthenticatorHandler $guardHandler, 
-                                AppAuthenticator $authenticator) 
+                                 Request $request, 
+                                 UserRepository $userRepository, 
+                                 GuardAuthenticatorHandler $guardHandler, 
+                                 AppAuthenticator $authenticator) 
     {
         $isValidConfirmationToken = $userRepository->isValidConfirmationToken($request->query->get('confirmationToken'), $user->getEmail());
 
@@ -106,9 +108,9 @@ class AuthController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
             $this->addFlash('success', 'Félicitations ! Votre compte est maintenant activé.');
-             return $guardHandler->authenticateUserAndHandleSuccess(
+            return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
@@ -121,5 +123,4 @@ class AuthController extends AbstractController
         return $this->redirectToRoute('app_home');
 
     }
-
 }

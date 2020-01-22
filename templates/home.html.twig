@@ -1,40 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-        {% for message in app.flashes('notice') %}      
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    {% endfor %}
-    
-    {% for message in app.flashes('success') %}      
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    {% endfor %}
+{% for message in app.flashes('notice') %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
 
-    {% for message in app.flashes('danger') %}      
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    {% endfor %}
-    
+{% for message in app.flashes('success') %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+
+{% for message in app.flashes('danger') %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+
 
 <figure class="cuisinaccueil">
     <div>
         <img class="photo-opacity" src="img/upload/imgaccueil.jpg" alt="installation_cuisine">
-    </div>    
+    </div>
     <section id="calque">
-        <h1 class="titreh3">INSTALLATEURS PROFESSIONNELS DE CUISINES, SALLES DE BAIN ET PLACARDS.</h1>
+        <h1 class="titreh3">INSTALLATEURS PROFESSIONNELS DE CUISINES, SALLES DE BAIN ET DRESSING</h1>
         {% if is_granted('ROLE_CLIENT') %}
         <a class="devis" href="{{ path('app_form_client') }}">DEVIS</a>
         {% elseif is_granted('ROLE_MAGASIN') %}
@@ -45,138 +45,140 @@
         <a href="#QSN">
             <img class="scroll" src="img/upload/fleche.png" alt="">
         </a>
-    </section> 
+    </section>
 </figure>
-       
-  
+
+
 <main class="container" id="QSN">
     <article class="article2">
-        <br>
         <h2>Qui sommes-nous ?</h2>
-        <p class="presentation">AD-INSTALLATIONS c'est avant tout Ahmed et Denis, deux amis et collègues forts d'une expérience de plus de 40 ans. Professionnels de la menuiserie et de l'ébénisterie, ils ont travaillé ensemble chez "LIDO Cuisine" et "Cuisine SCHMIDT". En 2000, ils décident de créer : AD-INSTALLATIONS, une entreprise spécialisée dans la pose sur-mesure de cuisines, salles de bain et placards dans la région parisienne. 
-        <br>
-        Depuis 20 ans, les plus grands magasins spécialisés : "Cuisine Schmidt", "Mobalpa", "Armony" et autres enseignes font confiance à AD-INSTALLATIONS en sous-traitant leurs services pour des clients toujours satisfaits. 
-        <br>
-        Ahmed et Denis, c'est au-delà de l'installation, c'est la réalisation de vos projets.</p>
+        <p class="presentation">AD-INSTALLATIONS c'est avant tout Ahmed et Denis, deux amis et collègues forts d'une
+            expérience de plus de 40 ans. Professionnels de la menuiserie et de l'ébénisterie, ils ont travaillé
+            ensemble chez "LIDO Cuisine" et "Cuisine SCHMIDT". En 2000, ils décident de créer : AD-INSTALLATIONS, une
+            entreprise spécialisée dans la pose sur-mesure de cuisines, salles de bain et dressing dans la région
+            parisienne.
+            <br>
+            Depuis 20 ans, les plus grands magasins spécialisés : "Cuisine Schmidt", "Mobalpa", "Armony" et autres
+            enseignes font confiance à AD-INSTALLATIONS en sous-traitant leurs services pour des clients toujours
+            satisfaits.
+            <br>
+            Ahmed et Denis, c'est au-delà de l'installation, c'est la réalisation de vos projets.</p>
     </article>
-        <hr>
-        <br> 
-    <h2 class="titre_competences">AD-INSTALLATIONS c'est aussi plusieurs domaines de compétences</h2>          
-    <br>     
-          
+    <hr>
+    <br>
+    <h2 class="titre_competences">AD-INSTALLATIONS c'est aussi plusieurs domaines de compétences</h2>
+    <br>
+
     <section class="photos_competences">
-        <div class="competences">    
+        <div class="competences">
             <figure class="figure_1">
-               <div class="testhover">
-                <img class="img_elec" src="img/upload/electricien.jpg" alt="électricité">
+                <div class="testhover">
+                    <img class="img_elec" src="img/upload/electricien.jpg" alt="électricité">
                 </div>
-                <figcaption class="cadre_1">Électricité 
-                <br>
-                <br>
-                <p class="explications">Déplacement et raccordement de vos appareils éléctriques.</p>
-                </figcaption>                   
-            </figure> 
+                <figcaption class="cadre_1">Électricité
+
+                    <p class="explications">Déplacement et raccordement de vos appareils éléctriques.</p>
+                </figcaption>
+            </figure>
             <figure class="figure_2">
-               <div class="testhover">
-                <img class="img_plomb" src="img/upload/plombier.jpg" alt="plomberie">
+                <div class="testhover">
+                    <img class="img_plomb" src="img/upload/plombier.jpg" alt="plomberie">
                 </div>
                 <figcaption class="cadre_2">Plomberie
-                <br>
-                <br>
-                <p class="explications">Déplacement et raccordement pour évier, LV et LL...</p>
-                </figcaption>                   
+
+                    <p class="explications">Déplacement et raccordement pour évier, LV et LL...</p>
+                </figcaption>
             </figure>
             <figure class="figure_3">
-               <div class="testhover">
-                <img class="img_carr" src="img/upload/carreleur.jpg" alt="carrelage">
+                <div class="testhover">
+                    <img class="img_carr" src="img/upload/carreleur.jpg" alt="carrelage">
                 </div>
                 <figcaption class="cadre_3">Carrelage
-                <br>
-                <br>
-                <p class="explications">Pose de votre carrelage en crédence.</p>
+
+                    <p class="explications">Pose de votre carrelage en crédence.</p>
                 </figcaption>
-            </figure>   
+            </figure>
             <figure class="figure_4">
                 <div class="testhover">
-                <img class="img_menui" src="img/upload/menuisier.jpg" alt="menuiserie">
+                    <img class="img_menui" src="img/upload/menuisier.jpg" alt="menuiserie">
                 </div>
                 <figcaption class="cadre_4">Menuiserie
-                <br>
-                <br>
-                <p class="explications">Installations réalisées avec des outils adaptés. </p>
+
+                    <p class="explications">Installations réalisées avec des outils adaptés. </p>
                 </figcaption>
-            </figure>     
+            </figure>
         </div>
-    </section>      
+    </section>
 
     <br>
-    <br> 
-    
-</main> 
-    
+    <br>
+
+</main>
+
 <div class="parallax-window" data-parallax="scroll" data-image-src="img/upload/salle_de_bain.jpg"></div>
-    
+
 <br>
- 
+
 <main class="container">
     <hr>
     <br>
-        <h2 class="titre_collaboration">AD-INSTALLATIONS : plusieurs façons de collaborer ensemble</h2>
-    <br>  
-        <div id="collaboration">    
-            <div class="testhover2">
-                <img class="img_planSDB" src="img/upload/register.jpg" alt="plan">
-            </div>                   
-            <div class="calque2">
-                <ul>
-                    <li class="tajriba1">Sous-traitance de nos services avec les magasins spécialisés</li>  
-                    <li class="tajriba2">Collaboration direct avec des clients possédant déjà leur cuisine, SdB...</li>
-                    <li class="tajriba3">Conseil auprès des clients sur le types de biens qu'ils souhaitent</li>
-                </ul>    
-            </div>     
+    <h2 class="titre_collaboration">AD-INSTALLATIONS : plusieurs façons de collaborer ensemble</h2>
+    <br>
+    <div id="collaboration">
+        <div class="testhover2">
+            <img class="img_planSDB" src="img/upload/register2.jpg" alt="plan">
         </div>
+        <div class="calque2">
+            <ul>
+                <li class="tajriba1">Sous-traitance de nos services avec les magasins spécialisés</li>
+                <li class="tajriba2">Collaboration direct avec des clients possédant déjà leur cuisine, SdB...</li>
+                <li class="tajriba3">Conseil auprès des clients sur le types de biens qu'ils souhaitent</li>
+            </ul>
+        </div>
+    </div>
     <br>
     <hr>
     <br>
-        <h2 class="titre_collaboration">Ils nous font confiance !</h2> 
-        <p class="article3">Les magasins spécialisés dans la vente de cuisine, salle de bain et placard font confiance à l'équipe AD-INSTALLATIONS pour leur profesionnalisme et cela, depuis plus de 20 ans.</p>
-        
-        <div id="confiance">
-            <div>
-                <a href="https://www.mobalpa.fr/" target="_blank">
-                <img class="img_mobalpa" src="img/upload/logo/mobalpa.jpg" alt="logo_mobalpa"> 
-                </a>
-            </div>
-            <div>
-                <a href="https://www.ma.cuisinella/fr-fr" target="_blank">
+    <h2 class="titre_collaboration">Ils nous font toujours confiance</h2>
+    <p class="article3">Les magasins spécialisés dans la vente de cuisines, salles de bain et dressing font confiance à
+        l'équipe AD-INSTALLATIONS pour leur profesionnalisme et cela, depuis plus de 20 ans.</p>
+
+    <div id="confiance">
+        <div>
+            <a href="https://www.mobalpa.fr/" target="_blank">
+                <img class="img_mobalpa" src="img/upload/logo/mobalpa.jpg" alt="logo_mobalpa">
+            </a>
+        </div>
+        <div>
+            <a href="https://www.ma.cuisinella/fr-fr" target="_blank">
                 <img class="img_cuisinella" src="img/upload/logo/cuisinella.jpg" alt="logo_cuisinella">
-                </a> 
-            </div>   
-            <div>
-                <a href="https://www.home-design.schmidt/fr-fr" target="_blank">
+            </a>
+        </div>
+        <div>
+            <a href="https://www.home-design.schmidt/fr-fr" target="_blank">
                 <img class="img_schmidt" src="img/upload/logo/schmidt.jpg" alt="logo_schmidt">
-                </a>   
-            </div>   
-            <div>
-                <a href="https://www.armonycuisines.fr/" target="_blank">
+            </a>
+        </div>
+        <div>
+            <a href="https://www.armonycuisines.fr/" target="_blank">
                 <img class="img_armony" src="img/upload/logo/armony.jpg" alt="logo_armony">
-                </a>   
-            </div>   
-            <div>
-                <a href="https://www.socooc.com/" target="_blank">
-                <img class="img_socooc"  src="img/upload/logo/socooc.jpg" alt="logo_socooc">
-                </a>    
-            </div>   
-            <div>
-                <a href="https://www.snaidero.fr/" target="_blank">
-                <img class="img_snaidero"  src="img/upload/logo/snaidero.png" alt="logo_snaidero">
-                </a>    
-            </div>     
-         </div>
-    
+            </a>
+        </div>
+        <div>
+            <a href="https://www.socooc.com/" target="_blank">
+                <img class="img_socooc" src="img/upload/logo/socooc.jpg" alt="logo_socooc">
+            </a>
+        </div>
+        <div>
+            <a href="https://www.snaidero.fr/" target="_blank">
+                <img class="img_snaidero" src="img/upload/logo/snaidero.png" alt="logo_snaidero">
+            </a>
+        </div>
+    </div>
+
     <br>
-    <br>    
-</main>     
+    <br>
+</main>
 
 
 {% endblock %}
@@ -184,4 +186,3 @@
 {% block title %}
 
 {% endblock %}
-

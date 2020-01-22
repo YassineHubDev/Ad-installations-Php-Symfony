@@ -25,11 +25,8 @@ class TaskType extends AbstractType
                 'invalid_message' => 'That is not a valid issue number' ,
             ]);
 
-        // ...
-
         $builder -> get ( 'issue' )
             -> addModelTransformer ( $this -> transformer );
     }
 
-    // ...
 }

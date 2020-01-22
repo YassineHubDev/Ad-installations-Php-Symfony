@@ -1,22 +1,22 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ResetMdpType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\HttpFoundation\Request;
-use App\Notification\FormNotification;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Form\FormError;
+use App\Notification\FormNotification;
 use App\Security\TokenAuthenticator;
-
 
 
 class SecurityController extends AbstractController
@@ -29,24 +29,8 @@ class SecurityController extends AbstractController
     {
         throw new \Exception('');
     }
-    
-    /**
-     * @Route("/home")
-     */
-    public function redictAction()
-    {
-        $authChecker = $this->container-get ('security.authorization_checker');
-        
-        if($authChecker->isGranted('ROLE_CLIENT')) {
-            return $this->render('form/formclient/html.twig');
-        } else if ($authChecker->isGranted('ROLE_MAGASIN')) {
-            return $this->render('form/formmag/html.twig');
-        } else {
-            return $this->render('security/login/html.twig');
-        }
-    }
-    
-public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
@@ -63,19 +47,19 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
             throw new \Exception('Tu n\'est ni un client ni un magasin, qui es-tu donc ?');
         }
     }
-    
-     /**
+
+    /**
       * @Route("/forgotten_password", name="app_forgotten_password")
       */
     public function forgottenPassword(
-                                    Request $request, 
-                                    UserPasswordEncoderInterface $encoder, 
-                                    \Swift_Mailer $mailer, 
-                                    TokenGeneratorInterface $tokenGenerator,
-                                    FormNotification $notification
-                                    ): Response
+        Request $request, 
+        UserPasswordEncoderInterface $encoder, 
+        \Swift_Mailer $mailer, 
+        TokenGeneratorInterface $tokenGenerator,
+        FormNotification $notification
+    ): Response
     {
-        
+
         if ($request->isMethod('POST')) {
 
             $email = $request->request->get('email');
@@ -99,9 +83,9 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
             }
 
             $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
-                        
+
             $notification->notify3($user);
-            
+
 
             $this->addFlash('notice', 'Un mail vous a été envoyé pour la modification de votre mot de passe.');
 
@@ -110,10 +94,10 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
 
         return $this->render('security/forgotten_password.html.twig');
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * @Route("/reset_password/{token}", name="app_reset_password")
      */
@@ -143,6 +127,50 @@ public function onAuthenticationSuccess(Request $request, TokenInterface $token,
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
 
+    }
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
+    /**
+     * @Route("/modification-du-mot-de-passe", name="app_reset_password_connected")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function resetPasswordConnected(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserPasswordEncoderInterface $encoder)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $form = $this->createForm(ResetMdpType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // encode the plain password
+            $passwordEncoder = $this->get('security.password_encoder');
+            $oldPassword = $request->request->get('reset_password')['oldPassword'];
+
+
+            // Si l'ancien mot de passe est bon
+            if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
+                $newEncodedPassword = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($newEncodedPassword);
+
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
+
+                return $this->redirectToRoute('app_home');
+            } else {
+                $form->addError(new FormError('Ancien mot de passe incorrect'));
+            }
+        }
+
+        return $this->render('security/modif-mot-de-passe.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
 }

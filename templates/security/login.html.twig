@@ -6,65 +6,59 @@
 <br> <br> <br> <br>  
 
 <main class="container">
-
-<!-- Default form login -->
-<form action="{{ path('app_login') }}" method="post">
-    {% if error %}
+    <!-- Default form login -->
+    <form action="{{ path('app_login') }}" method="post">
+        {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-   
-    
-<h1 class="titrespe">Connectez-vous à votre espace.</h1>
+        {% endif %}
 
-<!--    <p class="h4 mb-4">Connectez-vous</p>-->
-<div id="page_login">
-    
-    <!-- Email -->
-    <div>
-        <label for="inputEmail" ></label>
-        <input class="form-control mb-4" type="text" id="email" name="email" placeholder="Email" required="required" value="{{ last_username }}" required autofocus>
-    </div>
-    
-   
-    <!-- Password -->
-    <div>
-        <label for="inputPassword"></label>
-        <input type="password" id="inputPassword" class="form-control mb-4" name="password" placeholder="Mot de passe" required>
-    </div>
-    
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}">
 
-    <div class="d-flex justify-content-around">
-        <div>
-            <!-- Remember me -->
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" value="on" name="_remember_me">
-                <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi </label>
+        <h1 class="titre_form">Connectez-vous à votre espace.</h1>
+
+        <div id="page_login">
+
+            <!-- Email -->
+            <div>
+                <label for="inputEmail" ></label>
+                <input class="form-control mb-4" type="text" id="email" name="email" placeholder="Email" required="required" value="{{ last_username }}" required autofocus>
             </div>
+
+            <!-- Password -->
+            <div>
+                <label for="inputPassword"></label>
+                <input type="password" id="inputPassword" class="form-control mb-4" name="password" placeholder="Mot de passe" required>
+            </div>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
+
+            <div class="d-flex justify-content-around">
+                <div>
+                    <!-- Remember me -->
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" value="on" name="_remember_me">
+                        <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi </label>
+                    </div>
+                </div>
+
+
+                <div>
+                    <!-- Forgot password -->
+                    <a href="{{ path('app_forgotten_password') }}">MDP oublié ?</a>
+                </div>
+            </div>
+
+            <!-- Sign in button -->
+            <button class="btn btn-info btn-block my-4" type="submit">Se connecter</button>
+
+            <!-- Register -->
+            <p>Vous n'avez pas de compte ?
+                <a href="{{ path('app_register') }}">Inscrivez-vous</a>
+            </p>
+
         </div>
-             
-        
-        <div>
-            <!-- Forgot password -->
-            <a href="{{ path('app_forgotten_password') }}">MDP oublié ?</a>
-        </div>
-    </div>
-
-    <!-- Sign in button -->
-    <button class="btn btn-info btn-block my-4" type="submit">Se connecter</button>
-
-    <!-- Register -->
-    <p>Vous n'avez pas de compte ?
-        <a href="{{ path('app_register') }}">Inscrivez-vous</a>
-    </p>
-</div>
-</form>
-
+    </form>
 </main>
 
 <br> <br> <br> <br> 
-<!-- Default form login -->
-
-
 {% endblock %}

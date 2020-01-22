@@ -3,43 +3,50 @@ easy_admin:
         # List the entity class name you want to manage
         User:
             class: App\Entity\User
+            # On définit ci-dessous le contenu de la liste qui affichera les articles et les critères de tri
+            list:
+                fields:
+                    - id
+                    - { property: 'Username', label: 'Nom' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'raisonSociale', label: 'Magasin' }
+                    - Ville
+                    - { property: 'roles', label: 'Rôles', type: 'json_array' }
+                    - { property: 'active', label: 'Actver/Désactiver'}
+            
+            
             form:
                 fields:
-                    - "username"
+#                    - { property: 'publisher', label: 'Nom' }
                     - "email"
-                    - "raisonSociale"
+                    - { property: 'raisonSociale', label: 'Magasin' }
                     - "ville"
-                    - "password"
                     -  property: 'roles'
+                       label: 'Rôles'
                        type: 'choice'
                        type_options:
                            mapped: true
                            expanded: true
                            multiple: true
-                           choices: { 'CLIENT': 'ROLE_CLIENT', 'MAGASIN': 'ROLE_MAGASIN' }
-                    - property: 'password'
-                      type: 'repeated'
-                      type_options:
-                           type: Symfony\Component\Form\Extension\Core\Type\PasswordType
-                           required: true
-                           first_options: { label: 'MDP 1' }
-                           second_options: { label: 'MDP 2' }
-                    - "confirmationToken"
-            
+                           choices: { 'CLIENT': 'ROLE_CLIENT', 'MAGASIN': 'ROLE_MAGASIN', 'Administrateur':'ROLE_ADMIN' }
+
+
         Client:
             class: App\Entity\Client
             form:
                 fields:
                     - "sujet"
-                    - "projet"
-                    - { property: 'imageFile', type: 'file' }
-                    - { property : 'pdfFile' ,  type : 'vich_file' }
+                    - { property: 'projet', type: 'text_editor' }
+                    - { property: 'imageFile', type: 'vich_image' }
+#                    - { property : 'pdfFile' ,  type : 'vich_file' }
             list:
                 fields:
+                    - id
+                    - { property: 'publisher', type: 'email', label: 'Email' }
                     - "sujet"
-                    - "projet"
-                    - { property: 'image', type: 'image', base_path: '%app.path.client_images%' }
-                    - { property : 'pdf' ,  template : 'pdf.html.twig' ,  base_path : '%app.path.client_pdf%' }
+                    - { property: 'projet', type: 'text' }
+                    - { property: 'image', label: 'Fichier', type: 'file', base_path: '%app.path.client_images%' }
+#                    - { property : 'pdf' ,  template : 'pdf.html.twig' ,  base_path : '%app.path.client_pdf%' }
                     
             show:
                 fields:
@@ -53,15 +60,18 @@ easy_admin:
             form:
                 fields:
                     - "sujet"
-                    - "projet"
-                    - { property: 'imageFile', type: 'file' }
-                    - { property: 'pdfFile',  type: 'vich_file' }
+                    - { property: 'projet', type: 'text_editor' }
+                    - { property: 'imageFile', type: 'vich_image' }
+#                    - { property: 'pdfFile',  type: 'vich_file' }
             list:
                 fields:
+                    - id
+                    - { property: 'publisher', type: 'email', label: 'Email' }
                     - "sujet"
                     - "projet"
-                    - { property: 'image', type: 'image', base_path: '%app.path.magasin_images%' }
-                    - { property: 'pdf',  template: 'pdf.html.twig',  base_path: '%app.path.magasin_pdf%' }
+                    - { property: 'telephone', type: 'tel', label: 'Téléphone' }
+                    - { property: 'image', label: 'Fichier', type: 'file', base_path: '%app.path.magasin_images%' }
+#                    - { property: 'pdf',  template: 'pdf.html.twig',  base_path: '%app.path.magasin_pdf%' }
             show:
                 fields:
                     - { property: 'image', type: 'image', base_path: '%app.path.magasin_images%' }
@@ -73,7 +83,17 @@ easy_admin:
         form_theme:
             - '@EasyAdmin/form/bootstrap_4.html.twig'
             - '@VichUploader/Form/fields.html.twig'
+        
+        menu:
+            - { label: 'Utilisateurs' }
+            - { entity: 'User', label: 'Inscrits', icon: 'user' }
+            - { entity: 'Client', label: 'Projets clients', icon: 'user' }
+            - { entity: 'Magasin', label: 'Projets magasins', icon: 'user' }
+            
 
+    formats:
+    # Ici on définit le format des dates
+       datetime: 'd/m/Y h:i A e'
 
 
 

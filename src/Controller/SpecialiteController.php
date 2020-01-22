@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +16,8 @@ class SpecialiteController extends AbstractController
     {
         return $this->render('speciality/cuisine.html.twig');
     }
-    
-    
+
+
     /**
      * @Route("salles-de-bain", name="app_sdb")
      * @return Response
@@ -28,17 +26,14 @@ class SpecialiteController extends AbstractController
     {
         return $this->render('speciality/sdb.html.twig');
     }
-    
-    
+
+
     /**
-     * @Route("placards", name="app_placard")
+     * @Route("dressing", name="app_placard")
      * @return Response
      */
     public function placard(): Response
     {
         return $this->render('speciality/placard.html.twig');
     }
-    
-    
-    
 }

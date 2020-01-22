@@ -49,7 +49,7 @@ class IssueToNumberTransformer implements DataTransformerInterface
             -> getRepository ( Issue :: class )
             // query for the issue with this id
             -> find ( $issueNumber )
-        ;
+            ;
 
         if ( null === $issue ) {
             // causes a validation error

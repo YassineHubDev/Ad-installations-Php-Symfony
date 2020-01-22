@@ -1,17 +1,12 @@
 <h4> Bonjour ! </h4>
 
 <p>
-  Pour valider votre compte utilisateur, merci de cliquer sur ce  <a href="{{appUrl ~ 'activate-user/' ~ user.email ~ '?confirmationToken=' ~ user.confirmationToken}}">lien.</a> 
-  <hr>
-Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.
+    Pour valider votre compte utilisateur, merci de cliquer sur ce  <a href="{{appUrl ~ '/activate-user/' ~ user.email ~ '?confirmationToken=' ~ user.confirmationToken}}">lien.</a> 
+    <br>
+    Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.
 </p>
 
 <hr>
 
 <p>Cordialement,</p>
-<p>AD-INSTALLATIONS</p>
-
-
-<a href="/">
-    <img class="facebook" src="img/upload/logo/logo_ad-installations.png" alt="logo_ad-installations">
-</a>
+<img src="{{ img }}" width="200" border="0" alt="logo_ad_installations">

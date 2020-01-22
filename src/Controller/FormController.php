@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\Client;
 use App\Entity\Magasin;
@@ -20,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class FormController extends AbstractController
 {
     /**
-     * @Route("/form-client", name="app_form_client")
+     * @Route("/votre-projet-particulier", name="app_form_client")
      * @param Request $request
      * @param User $user
      * @return Response
@@ -32,21 +30,21 @@ class FormController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-        
+
             $user = $tokenStorage->getToken()->getUser();
             $client->setPublisher($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($client);
             $entityManager->flush();
-            
-            $notification->notify2($client);
-            
+
+            $notification->notify2($client, $user);
+
             $this->addFlash(
                 'notice',
                 'Votre message a bien été envoyé ! L\'équipe AD-INSTALLATIONS vous répondra dans les plus brefs délais.'
             );
             return $this->redirectToRoute('app_home');
-            
+
             // do anything else you need here, like send an email
         }
 
@@ -56,7 +54,7 @@ class FormController extends AbstractController
     }
 
     /**
-     * @Route("/form-magasin", name="app_form_magasin")
+     * @Route("/votre-projet-magasin", name="app_form_magasin")
      * @param Request $request
      * @param User $user
      * @return Response
@@ -75,8 +73,8 @@ class FormController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($magasin);
             $entityManager->flush();
-            
-            $notification->notify1($magasin);
+
+            $notification->notify1($magasin, $user);
 
 
             $this->addFlash(
@@ -93,6 +91,4 @@ class FormController extends AbstractController
             'magForm' => $form->createView(),
         ]);
     }
-
-
 }

@@ -1,27 +1,36 @@
 <h4> Bonjour ! </h4>
 
 <p>
-   vous a envoyé le message suivant :
-  
-  <br>
-  
-  Sujet :  {{client.sujet}}
-  
-  <br>
-  <br>
-  
-  Message : 
-  
-  <br>
-  <br>
-  
-  {{client.projet}} 
+    Vous venez de reçevoir un projet du client suivant :
+    <br>
+    <br>
+    Nom : {{user.username}}
+    <br>
+    Email : {{user.email}}
+    <br>
+    Ville : {{user.ville}}
+
+    <br>
+    <br>
+
+    N'hésitez pas à vous rendre sur <a href="www.ad-installations.fr/easy-admin/">votre espace admin</a> pour télécharger les documents nécessaires.
 </p>
 
-<a href="{{appUrl ~ client.imageFile}}">lien.</a>
+<hr>
+
+
+<p>Sujet : {{client.sujet}}</p>
+
+<br>
+
+<p>Message :
+
+    <br>
+
+    {{client.projet}} </p>
 
 <hr>
 
 <p>Cordialement,</p>
-<p>AD-INSTALLATIONS</p>
+<img src="{{ img }}" width="200" border="0" alt="logo_ad_installations">
 

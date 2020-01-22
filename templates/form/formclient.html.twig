@@ -10,35 +10,35 @@
 
 <main class="container">
 
-{{ form_start(clientForm) }}
+    {{ form_start(clientForm) }}
 
-    <h1 class="titrespe">Faites-nous part de votre projet !</h1>
-    
-<section id="sectionformmag">
-   
-   
-    <div id="page_login2">
-    {{ form_row(clientForm.sujet, {'label' : false}) }}
-    {{ form_errors(clientForm.sujet) }}
-    {{ form_widget(clientForm.sujet) }}
-    
-    {{ form_row(clientForm.projet, {'label' : false}) }}
-    {{ form_errors(clientForm.projet) }}
-    {{ form_widget(clientForm.projet) }}
-    
-    {{ form_row(clientForm.imageFile, {'label' : false}) }}
-    {{ form_errors(clientForm.imageFile) }}
-    {{ form_widget(clientForm.imageFile) }}
-    
-    {{ form_widget(clientForm) }}
-        <input type="submit" class="btn btn-lg btn-primary" value="Soumettre">
-    {{ form_end(clientForm) }}
-    
-</div>
-</section>
+    <h1 class="titre_form">Et si vous partagiez votre projet avec nous ?</h1>
 
+    <section id="sectionformmag">
+
+        <div id="page_login2">
+            {{ form_row(clientForm.sujet, {'label' : false}) }}
+            {{ form_errors(clientForm.sujet) }}
+            {{ form_widget(clientForm.sujet) }}
+
+            {{ form_row(clientForm.telephone, {'label' : false}) }}
+            {{ form_widget(clientForm.telephone) }}
+
+            {{ form_row(clientForm.projet, {'label' : false}) }}
+            {{ form_errors(clientForm.projet) }}
+            {{ form_widget(clientForm.projet) }}
+
+            {{ form_row(clientForm.imageFile, {'label' : false}) }}
+            {{ form_errors(clientForm.imageFile) }}
+            {{ form_widget(clientForm.imageFile) }}
+
+            {{ form_widget(clientForm) }}
+            <input type="submit" class="btn btn-lg btn-primary" value="Soumettre">
+            {{ form_end(clientForm) }}
+
+        </div>
+    </section>
 </main>
 
 <br> <br> <br> <br> 
 {% endblock %}
-

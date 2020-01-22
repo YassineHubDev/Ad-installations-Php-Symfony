@@ -4,65 +4,63 @@
 
 {% block body %}
 <br> <br> <br> <br>
-   
+
 <main class="container"> 
-       
 
-   {{ form_start(registrationForm) }}
-        
- <h1 class="titrespe">Inscrivez-vous !</h1> 
+    {{ form_start(registrationForm) }}
 
-        
-<div id="page_login">  
-   
-    <fieldset class="form-group">
-<!--
-    {{ form_row(registrationForm.roles, {'label' : "Vous êtes :"})}}
-    {{ form_widget(registrationForm.roles) }}
+    <h1 class="titre_form">Inscrivez-vous !</h1> 
+
+
+    <div id="page_login">  
+
+        <fieldset class="form-group">
+
+            <!--
+{{ form_row(registrationForm.roles, {'label' : "Vous êtes :"})}}
+{{ form_widget(registrationForm.roles) }}
 -->
-    
-       <legend class="col-form-label">Vous êtes :</legend>
-          
-          
-           <div id="registration_form_roles" >
-               <div class="form-check form-check-inline" >        
-                   <input  
-                   id="registration_form_roles_0" 
-                   name="registration_form[roles]" 
-                   class="form-check-input" 
-                   value="ROLE_MAGASIN" 
-                   type="radio" 
-                   onclick="afficher()"
-                   checked/>
-                   <label class="form-check-label" for="registration_form_roles_0">Un magasin</label>
-                </div>
-                         
+
+            <legend class="col-form-label">Vous êtes :</legend>
+
+            <div id="registration_form_roles" >
                 <div class="form-check form-check-inline" >        
-                   <input 
-                   id="registration_form_roles_1" 
-                   name="registration_form[roles]" 
-                   class="form-check-input" 
-                   value="ROLE_CLIENT" 
-                   type="radio" 
-                   onclick="effacer()"
-                   >
+                    <input  
+                           id="registration_form_roles_0" 
+                           name="registration_form[roles]" 
+                           class="form-check-input" 
+                           value="ROLE_MAGASIN" 
+                           type="radio" 
+                           onclick="afficher()"
+                           checked/>
+                    <label class="form-check-label" for="registration_form_roles_0">Un magasin</label>
+                </div>
+
+                <div class="form-check form-check-inline" >        
+                    <input 
+                           id="registration_form_roles_1" 
+                           name="registration_form[roles]" 
+                           class="form-check-input" 
+                           value="ROLE_CLIENT" 
+                           type="radio" 
+                           onclick="effacer()"
+                           >
                     <label class="form-check-label" for="registration_form_roles_1">Un particulier</label>
                 </div>
             </div>
-    </fieldset>
-        
+        </fieldset>
+
         <div class="form-row">
             <div class="col">
                 {{ form_row(registrationForm.username, {'label' : false})}}
                 {{ form_widget(registrationForm.username) }}
             </div>
-            
-         
+
             <div class="col">
                 <p>{{ form_widget(registrationForm.raisonSociale) }}</p>
             </div>
         </div>
-        
+
         <br>
 
         <div class="form-row">
@@ -76,28 +74,28 @@
                 {{ form_widget(registrationForm.email) }}
             </div>
         </div>
-        
+
         <br>
-        
+
         <div class="form-row">
             <div class="col">
                 {{ form_row(registrationForm.plainPassword.first, {'label' : false})}}
             </div>
-            
+
             <div class="col">    
                 {{ form_row(registrationForm.plainPassword.second, {'label' : false}) }}
             </div>
         </div>
-       
 
-    {{ form_widget(registrationForm) }}
-        <input type="submit" class="btn btn-success" value="Soumettre"/>    
-    {{ form_end(registrationForm) }}
 
-</div>
+        {{ form_widget(registrationForm) }}
+        <input type="submit" class="btn btn-success" value="Soumettre"/> 
+        {{ form_end(registrationForm) }}
+
+     {{ form_end(registrationForm) }}
+
+
+    </div>
 </main>
-
-<br> <br> <br> <br> 
-{{ form_end(registrationForm) }}
-        
+<br> <br> <br> <br>
 {% endblock %}

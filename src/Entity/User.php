@@ -21,8 +21,22 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $raisonSociale;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
      * @Assert\Email(strict=true, message="Le format de l'email est incorrect")
      */
     private $email;
@@ -41,18 +55,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $raisonSociale;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ville;
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $username;
-
+    private $oldPassword;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -60,25 +68,77 @@ class User implements UserInterface
     private $confirmationToken;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     */
+    private $resetToken;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $active = false;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $resetToken;
+
+    public function __toString()
+    {
+        return $this->email;
+    }
 
 
-    
-    
-    
-    //GETTER & SETTER
+
+
+
+    //GETTER & SETTER//
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+
+    public function getRaisonSociale(): ?string
+    {
+        return $this->raisonSociale;
+    }
+
+    public function setRaisonSociale(?string $raisonSociale): self
+    {
+        $this->raisonSociale = $raisonSociale;
+
+        return $this;
+    }
+
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
 
     public function getEmail(): ?string
     {
@@ -92,15 +152,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
 
     /**
      * @see UserInterface
@@ -120,6 +171,7 @@ class User implements UserInterface
 
         return $this;
     }
+
 
     /**
      * @see UserInterface
@@ -153,66 +205,46 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getRaisonSociale(): ?string
+
+    public function getPlainPassword(): ?string
     {
-        return $this->raisonSociale;
+        return $this->plainPassword;
     }
 
-    public function setRaisonSociale(?string $raisonSociale): self
+    public function setPlainPassword(?string $plainPassword): self
     {
-        $this->raisonSociale = $raisonSociale;
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
 
-    public function getVille(): ?string
+
+    public function getOldPassword(): ?string
     {
-        return $this->ville;
+        return $this->oldPassword;
     }
 
-    public function setVille(string $ville): self
+    public function setOldPassword(?string $oldPassword): self
     {
-        $this->ville = $ville;
+        $this->oldPassword = $oldPassword;
 
         return $this;
     }
 
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
 
-        return $this;
-    }
-    
-    
-    
-    
-    
-    
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
 
         return $this;
     }
-    
+
 
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
     }
 
-    public function isActive(): ?bool
-    {
-        return $this->active;
-    }
-
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
-
-        return $this;
-    }
 
     public function getResetToken(): ?string
     {
@@ -226,4 +258,16 @@ class User implements UserInterface
         return $this;
     }
 
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
 }

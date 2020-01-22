@@ -9,21 +9,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-
 class MagFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            
+
             ->add('sujet', null, array ('attr' => array('placeholder' => 'Sujet')))
-            ->add('telephone', null, array ('attr' => array('placeholder' => 'Téléphone')))
-            ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message...')))
+            ->add('telephone', null, array ('attr' => array('placeholder' => 'Téléphone'), 'required' => false))
+            ->add('projet', null, array ('attr' => array('placeholder' => 'Votre message...'), 'required' => true))
             ->add('imageFile', VichImageType::class, [
                 'required' => false
             ])
             ;
-        
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -33,4 +32,3 @@ class MagFormType extends AbstractType
         ]);
     }
 }
-

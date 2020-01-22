@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Security;
+
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -66,25 +68,25 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-       
+
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
-        
+
         } else if(!$user->isActive()) {
             throw new CustomUserMessageAuthenticationException('User is not active, please active your account.');
         }
-            
-        
+
+
         return $user;
     }
-    
+
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
-    
+
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
@@ -96,6 +98,10 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
         } elseif (in_array('ROLE_MAGASIN', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
+
+        } elseif (in_array('ROLE_ADMIN', $roles)) {
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
+
         } else {
             throw new \Exception('Tu n\'est ni un client ni un magasin, qui es-tu donc ?');
         }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,27 +27,19 @@ class Client
      */
     private $projet;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="clients")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $publisher;
-    
+
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $filename;
-    
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @var string
      */
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="client_images", fileNameProperty="filename")
+     * @Vich\UploadableField(mapping="client_images", fileNameProperty="image")
      * @var File|null
      */
     private $imageFile;
@@ -63,8 +56,7 @@ class Client
     private $sujet;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pdf;
 
@@ -74,20 +66,27 @@ class Client
      */
     private $pdfFile;
 
-        
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex(
+            pattern ="/^((\+)33|0|0033)[1-9](\d{2}){4}$/")
+     */
+    private $telephone;
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->updateAt = new \Datetime();
     }
 
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     //GETTER & SETTER//
 
     public function getId(): ?int
@@ -119,11 +118,7 @@ class Client
 
         return $this;
     }
-    
-    
-    
-    
-    
+
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -142,27 +137,25 @@ class Client
         return $this->imageFile;
     }
 
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-    
-    
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    
-    
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+
     public function getSujet(): ?string
     {
         return $this->sujet;
     }
 
-    
-    
+
     public function setSujet(string $sujet): self
     {
         $this->sujet = $sujet;
@@ -175,7 +168,7 @@ class Client
         return $this->pdf;
     }
 
-    public function setPdf(string $pdf): self
+    public function setPdf(?string $pdf): self
     {
         $this->pdf = $pdf;
 
@@ -194,16 +187,15 @@ class Client
         return $this;
     }
 
-    public function getFilename(): ?string
+    public function getTelephone(): ?string
     {
-        return $this->filename;
+        return $this->telephone;
     }
 
-    public function setFilename(?string $filename): self
+    public function setTelephone(?string $telephone): self
     {
-        $this->filename = $filename;
+        $this->telephone = $telephone;
 
         return $this;
     }
-    
 }
