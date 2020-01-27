@@ -11,6 +11,14 @@
     z-index: 10;
 }
 
+.mr-auto {
+    padding-left: 1%
+}
+
+ul li a:hover {
+    color:  red
+}
+
 ul li {
     list-style: none;
     font-size: 20px;
@@ -34,6 +42,11 @@ ul li {
     max-width: 100%;
     height: auto
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
 
 .scroll{
     display: flex;
@@ -108,6 +121,7 @@ h2 {
     text-align: center;
     font-size: 25px;
     font-family: 'Raleway', sans-serif;
+    font-weight: 600
 }
 
 /*QUI SOMMES NOUS ?*/
@@ -124,11 +138,11 @@ h2 {
     font-size: 20px;
 }
 
-.titrespe {
+.titreSpeCuisine {
     font-family: 'Raleway', sans-serif;    
     position: absolute;
-    left: 23%;
-    bottom: 30%;
+    left: 36%;
+    bottom: 33%;
     background-color: rgba(248, 249, 250, 0.7);
     z-index: 1;
     display: flex;
@@ -137,6 +151,41 @@ h2 {
     color: rgba(139, 69, 19);
     max-width: 50%;
     font-size: 4vw;
+    padding: 0 2% 0 2%;
+    /*    font-weight: bold*/
+}
+
+.titreSpeSdb {
+    font-family: 'Raleway', sans-serif;    
+    position: absolute;
+    left: 27%;
+    bottom: 33%;
+    background-color: rgba(248, 249, 250, 0.7);
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    color: rgba(139, 69, 19);
+    max-width: 50%;
+    font-size: 4vw;
+    padding: 0 2% 0 2%;
+    /*    font-weight: bold*/
+}
+
+.titreSpeDressing {
+    font-family: 'Raleway', sans-serif;    
+    position: absolute;
+    left: 34%;
+    bottom: 33%;
+    background-color: rgba(248, 249, 250, 0.7);
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    color: rgba(139, 69, 19);
+    max-width: 50%;
+    font-size: 4vw;
+    padding: 0 2% 0 2%;
     /*    font-weight: bold*/
 }
 
@@ -181,7 +230,8 @@ h2 {
     text-align: center;
     font-size: 25px;
     background-color: #D2B48C;
-    color: black
+    color: black;
+    font-weight: 600
 }
 
 .figure_2 {
@@ -209,7 +259,8 @@ h2 {
     text-align: center;
     font-size: 25px;
     background-color: #FFF8DC;
-    color: black
+    color: black;
+    font-weight: 600
 }
 
 .figure_3 {
@@ -237,7 +288,8 @@ h2 {
     text-align: center;
     font-size: 25px;
     background-color: #D2B48C;
-    color: black
+    color: black;
+    font-weight: 600
 }
 
 .figure_4 {
@@ -265,12 +317,14 @@ h2 {
     text-align: center;
     font-size: 25px;
     background-color: #FFF8DC;
-    color: black
+    color: black;
+    font-weight: 600
 }
 
 .explications {
     font-size: 16px;
-/*    padding-top: 30px*/
+    padding-top: 30px;
+    font-weight: 400
 }
 
 
@@ -670,5 +724,149 @@ textarea.form-control {
 .form-group {
     font-family: 'Mukta Malar', sans-serif;
     font-size: 17px
+}
+
+/*Footer*/
+.contactezNous {
+    color: white;
+    transition: 1s
+}
+
+.contactezNous:hover {
+    color: #D2B48C;
+    transition: 1s
+}
+
+.facebook {
+    transition: 1s
+}
+
+.facebook:hover {
+    background:  #3a559f;
+    transition: 1s
+}
+
+.dropdown-menu {
+    left: -82px
+}
+
+.cuisineTest_1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.cuisineTest {
+    border: 2px solid #8B4513;
+    border-radius: 22px;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    padding: 4px 25px;
+    margin-bottom: 40px;
+    font-size: 22px;
+    transition: 1s
+}
+
+
+.cuisineTest:hover {
+    background-color: #8B4513;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    transition: 1s
+}
+
+
+
+.button_submit {
+    border: 2px solid #8B4513;
+    border-radius: 22px;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    padding: 4px 25px;
+    /*    margin-bottom: 40px;*/
+    font-size: 22px;
+    transition: 1s
+}
+
+
+.button_submit:hover {
+    background-color: #8B4513;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    transition: 1s
+}
+
+
+
+
+
+.cookie{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 7px 20px;
+
+    color: #666;
+    background-color: #f2f2f2;
+    font-size: 0.9em;
+    border-top: 1px solid #e4e4e4;
+}
+
+.cookie a{text-decoration: underline;}
+.cookie a:hover{text-decoration: none;}
+
+.cookie_btn{
+    display: inline;
+    margin-left: 15px;
+    padding: 4px 10px;
+
+    background-color: #55acee;
+    color: white;
+    border-radius: 3px
+}
+
+.cookie_btn-error{
+    background-color: #e84e40;
+}
+
+.srcphoto {
+    width: 100px;
+    height: 100px
+}
+
+.justify {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.mdp {
+    color: black;
+    text-decoration-line: underline
+}
+
+.mdp:hover {
+    color: #8c430b
+}
+
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Chrome */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin:0;
+}
+
+/* Opéra*/
+input::-o-inner-spin-button,
+input::-o-outer-spin-button { 
+    -o-appearance: none;
+    margin:0
 }
 

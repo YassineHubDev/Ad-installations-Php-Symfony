@@ -3,11 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -40,12 +39,14 @@ class Client
 
     /**
      * @Vich\UploadableField(mapping="client_images", fileNameProperty="image")
+     *
      * @var File|null
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $updatedAt;
@@ -62,17 +63,17 @@ class Client
 
     /**
      * @Vich\UploadableField(mapping="client_pdf", fileNameProperty="pdf")
+     *
      * @var File
      */
     private $pdfFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", length=255, nullable=true)
      * @Assert\Regex(
-            pattern ="/^((\+)33|0|0033)[1-9](\d{2}){4}$/")
+            pattern ="/^((\+)33|0|0033)[1-9](\d{2}){4}$/", message="Format du numéro non valide")
      */
     private $telephone;
-
 
     public function __construct()
     {
@@ -80,20 +81,12 @@ class Client
         $this->updateAt = new \Datetime();
     }
 
-
-
-
-
-
-
-
     //GETTER & SETTER//
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     public function getProjet(): ?string
     {
@@ -149,12 +142,10 @@ class Client
         return $this;
     }
 
-
     public function getSujet(): ?string
     {
         return $this->sujet;
     }
-
 
     public function setSujet(string $sujet): self
     {
@@ -187,15 +178,17 @@ class Client
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): ?int
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setTelephone(int $telephone): self
     {
         $this->telephone = $telephone;
 
         return $this;
     }
+
+    
 }

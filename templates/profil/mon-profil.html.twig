@@ -70,16 +70,18 @@
         <div class="d-flex">
             <div>
                 <!-- Reset password -->
-                <a href="{{ path('app_reset_password_connected') }}">Changer votre mot de passe</a>
+                <a class="mdp" href="{{ path('app_reset_password_connected') }}">Changer mon mot de passe</a>
             </div>
         </div>
 
+        <br>
+
         <!-- Sign in button -->
-        <button class="btn btn-info btn-block my-4" type="submit">Mettre à jour</button>
+        <button class="button_submit" type="submit">Mettre à jour</button>
 
         <br>
 
-<!--
+        <!--
 {{ form_row(form.roles, {'label' : false})}}
 {{ form_widget(form.roles)}}
 -->

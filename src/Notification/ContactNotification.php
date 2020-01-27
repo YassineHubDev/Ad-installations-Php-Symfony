@@ -3,11 +3,11 @@
 namespace App\Notification;
 
 use App\Entity\User;
-use Twig\Environment;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Twig\Environment;
 
-class ContactNotification {
-
+class ContactNotification
+{
     /**
      *@var \Swift_Mailer
      */
@@ -28,12 +28,12 @@ class ContactNotification {
         $this->mailer = $mailer;
         $this->renderer = $renderer;
         $this->parameters = $parameters;
-    } 
+    }
 
-    public function notify (User $user) 
+    public function notify(User $user)
     {
         $appUrl = $this->parameters->get('app.url');
-        $message = (new \Swift_Message('Confirmation : ' . $user->getUsername()))
+        $message = (new \Swift_Message('Confirmation : '.$user->getUsername()))
             ->setSubject('Confirmation de votre compte')
             ->setFrom($this->parameters->get('app.email.noreply'))
             ->setTo($user->getEmail());
@@ -43,7 +43,7 @@ class ContactNotification {
             $this->renderer->render('email/modele-mail.html.twig', [
                 'user' => $user,
                 'appUrl' => $appUrl,
-                'img'    => $img,
+                'img' => $img,
             ]), 'text/html'
         );
         // Envoi du mail

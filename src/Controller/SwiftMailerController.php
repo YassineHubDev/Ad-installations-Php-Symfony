@@ -9,7 +9,7 @@ class SwiftMailerController extends AbstractController
 {
     /**
      * @Route("/email", name="email")
-     * @param \Swift_Mailer $mailer
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(\Swift_Mailer $mailer)
@@ -25,6 +25,7 @@ class SwiftMailerController extends AbstractController
         );
         // Envoi du mail
         $mailer->send($mail);
+
         return $this->render('email/index.html.twig', [
             'controller_name' => 'EmailController',
         ]);

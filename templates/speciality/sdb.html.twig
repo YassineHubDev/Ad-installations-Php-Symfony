@@ -12,7 +12,7 @@ Salles de bain
         <img class="photo-opacity2" src="img/upload/salledebain.jpg" alt="photo_salledebain">    
     </div>
     <section>
-        <h1 class="titrespe">NOS REALISATIONS DE SALLES DE BAIN</h1>
+        <h1 class="titreSpeSdb">NOS SALLES DE BAIN</h1>
     </section> 
 </figure>
 
@@ -79,8 +79,18 @@ Salles de bain
                 <img class="img_gal" src="img/upload/salles_de_bain/couleurs.jpg" alt="couleurs">
             </a>
         </div>
-
     </section>
+
+    <div class="cuisineTest_1">
+        {% if is_granted('ROLE_CLIENT') %}
+        <a class="cuisineTest" href="{{ path('app_form_client') }}">CONTACTEZ-NOUS</a>
+        {% elseif is_granted('ROLE_MAGASIN') %}
+        <a class="cuisineTest" href="{{ path('app_form_magasin') }}">CONTACTEZ-NOUS</a>
+        {% else %}
+        <a class="cuisineTest" href="{{ path('app_login') }}">CONTACTEZ-NOUS</a>
+        {% endif %}
+    </div>
+
 </main>
 
 {% endblock %}

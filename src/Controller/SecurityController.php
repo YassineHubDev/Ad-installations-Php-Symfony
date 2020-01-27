@@ -4,25 +4,23 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ResetMdpType;
+use App\Notification\FormNotification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Form\FormError;
-use App\Notification\FormNotification;
-use App\Security\TokenAuthenticator;
-
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/logout", name="app_logout")
+     *
      * @throws \Exception
      */
     public function logout()
@@ -49,43 +47,41 @@ class SecurityController extends AbstractController
     }
 
     /**
-      * @Route("/forgotten_password", name="app_forgotten_password")
-      */
+     * @Route("/forgotten_password", name="app_forgotten_password")
+     */
     public function forgottenPassword(
-        Request $request, 
-        UserPasswordEncoderInterface $encoder, 
-        \Swift_Mailer $mailer, 
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        \Swift_Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator,
         FormNotification $notification
-    ): Response
-    {
-
+    ): Response {
         if ($request->isMethod('POST')) {
-
             $email = $request->request->get('email');
 
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
             /* @var $user User */
 
-            if ($user === null) {
+            if (null === $user) {
                 $this->addFlash('danger', 'Veuillez saisir l\'adresse email renseignée lors de votre inscription.');
+
                 return $this->redirectToRoute('app_forgotten_password');
             }
             $token = $tokenGenerator->generateToken();
 
-            try{
+            try {
                 $user->setResetToken($token);
                 $entityManager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
+
                 return $this->redirectToRoute('app_home');
             }
 
-            $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $notification->notify3($user);
-
 
             $this->addFlash('notice', 'Un mail vous a été envoyé pour la modification de votre mot de passe.');
 
@@ -95,23 +91,20 @@ class SecurityController extends AbstractController
         return $this->render('security/forgotten_password.html.twig');
     }
 
-
-
-
     /**
      * @Route("/reset_password/{token}", name="app_reset_password")
      */
     public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
     {
-
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
 
             $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
             /* @var $user User */
 
-            if ($user === null) {
+            if (null === $user) {
                 $this->addFlash('danger', 'Token Inconnu');
+
                 return $this->redirectToRoute('app_home');
             }
 
@@ -122,11 +115,9 @@ class SecurityController extends AbstractController
             $this->addFlash('notice', 'Votre mot de passe a été mis à jour.');
 
             return $this->redirectToRoute('app_home');
-        }else {
-
+        } else {
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }
-
     }
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -146,14 +137,17 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             // encode the plain password
-            $passwordEncoder = $this->get('security.password_encoder');
-            $oldPassword = $request->request->get('reset_password')['oldPassword'];
-
+            $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                );
+            
+//        dump($request->request);die();
+            $password = $request->request->get('password')['oldPassword'];
 
             // Si l'ancien mot de passe est bon
-            if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
+            if ($passwordEncoder->isPasswordValid($user, $password)) {
                 $newEncodedPassword = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($newEncodedPassword);
 
@@ -168,9 +162,8 @@ class SecurityController extends AbstractController
             }
         }
 
-        return $this->render('security/modif-mot-de-passe.html.twig', array(
+        return $this->render('security/modif-mot-de-passe.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
     }
-
 }

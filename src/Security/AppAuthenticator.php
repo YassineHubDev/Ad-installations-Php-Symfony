@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,25 +30,27 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
      * @var Security
      */
     private $security;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         Security $security
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->security = $security;
     }
+
     public function supports(Request $request)
     {
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
+
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -60,8 +62,10 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
             Security::LAST_USERNAME,
             $credentials['email']
         );
+
         return $credentials;
     }
+
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -73,11 +77,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
-
-        } else if(!$user->isActive()) {
+        } elseif (!$user->isActive()) {
             throw new CustomUserMessageAuthenticationException('User is not active, please active your account.');
         }
-
 
         return $user;
     }
@@ -98,14 +100,13 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
         } elseif (in_array('ROLE_MAGASIN', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
-
         } elseif (in_array('ROLE_ADMIN', $roles)) {
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
-
         } else {
             throw new \Exception('Tu n\'est ni un client ni un magasin, qui es-tu donc ?');
         }
     }
+
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate('app_login');

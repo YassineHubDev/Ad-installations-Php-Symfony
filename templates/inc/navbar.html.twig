@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-light">
     <a href="/">
-        <img class="facebook" src="img/upload/logo/logo_ad-installations.png" alt="logo_ad-installations">
+        <img class="#" src="img/upload/logo/logo_ad-installations.png" alt="logo_ad-installations">
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,15 +9,15 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item1">
                 <a class="nav-link text-dark" href="{{ path('app_cuisine') }}" tabindex="-1" aria-disabled="true">Cuisines</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item1">
                 <a class="nav-link text-dark" href="{{ path('app_sdb') }}" tabindex="-1" aria-disabled="true">Salles de bain</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item1">
                 <a class="nav-link text-dark" href="{{ path('app_placard') }}" tabindex="-1" aria-disabled="true">Dressing</a>
             </li>            
 
@@ -29,13 +29,13 @@
 
             {% if is_granted('ROLE_MAGASIN') %}
             <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ path('app_form_magasin') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
+                <a class="nav-link text-dark" href="{{ path('app_form_magasin') }}" tabindex="-1" aria-disabled="true">Mon projet</a>
             </li>
             {% endif %}
 
             {% if is_granted('ROLE_CLIENT') %}
             <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ path('app_form_client') }}" tabindex="-1" aria-disabled="true">Votre projet</a>
+                <a class="nav-link text-dark" href="{{ path('app_form_client') }}" tabindex="-1" aria-disabled="true">Mon projet</a>
             </li>
             {% endif %}
         </ul>
@@ -48,22 +48,23 @@
                    role="button" 
                    data-toggle="dropdown" 
                    aria-haspopup="true" 
-                   aria-expanded="false">Votre profil
+                   aria-expanded="false">Mon profil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('app_profile') }}">Vos informations</a>
-                    <a class="dropdown-item" href="{{ path('app_reset_password_connected') }}">Sécurité</a>
+                    <a class="dropdown-item" href="{{ path('app_profile') }}">Mes informations</a>
+                    <a class="dropdown-item" href="{{ path('app_reset_password_connected') }}">Changer de mot de passe</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                 </div>
             </li>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ path('app_register') }}" tabindex="-1" aria-disabled="true">S'inscrire</a>
+            <li class="nav-item">     
+                <a class="nav-link text-dark" href="{{ path('app_register') }}" tabindex="-1" aria-disabled="true"><img src="img/upload/logo/inscription_logo.png" alt="inscription" alt="inscription"> S'inscrire </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ path('app_login') }}" tabindex="-1" aria-disabled="true">Se connecter</a>
+            <li class="nav-item">     
+                <a class="nav-link text-dark" href="{{ path('app_login') }}" tabindex="-1" aria-disabled="true"><img src="img/upload/logo/login_logo.png" alt="inscription" alt="inscription"> Se connecter</a>
             </li>
+           
             {% endif %}
         </ul>
 

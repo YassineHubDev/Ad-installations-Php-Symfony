@@ -36,7 +36,6 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    
     public function isValidConfirmationToken($confirmationToken, $email)
     {
         $queryBuilder = $this->createQueryBuilder('u')
@@ -46,7 +45,6 @@ class UserRepository extends ServiceEntityRepository
             ->setParameters(['confirmationToken' => $confirmationToken, 'email' => $email])
             ->getQuery();
 
-        return count($queryBuilder->getResult()) === 1 ? true : false;
-    
+        return 1 === count($queryBuilder->getResult()) ? true : false;
     }
 }

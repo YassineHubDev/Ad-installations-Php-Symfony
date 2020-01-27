@@ -3,11 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MagasinRepository")
@@ -30,7 +29,7 @@ class Magasin
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Regex(
-            pattern ="/^((\+)33|0|0033)[1-9](\d{2}){4}$/", message="numéro non valide")
+            pattern ="/^((\+)33|0|0033)[1-9](\d{2}){4}$/", message="Format du numéro non valide")
      */
     private $telephone;
 
@@ -41,18 +40,21 @@ class Magasin
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $image;
 
     /**
      * @Vich\UploadableField(mapping="magasin_images", fileNameProperty="image")
+     *
      * @var File|null
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $updatedAt;
@@ -65,28 +67,23 @@ class Magasin
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var File
      */
     private $pdf;
 
     /**
      * @Vich\UploadableField(mapping="magasin_pdf", fileNameProperty="pdf")
+     *
      * @var File
      */
     private $pdfFile;
-
-
-
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
     }
-    
-    
-    
-    
-    
+
     //GETTER & STTER//
 
     public function getId(): ?int
@@ -153,7 +150,6 @@ class Magasin
 
         return $this;
     }
-
 
     public function getPublisher(): ?user
     {
@@ -235,5 +231,4 @@ class Magasin
 
         return $this;
     }
-
 }

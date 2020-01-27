@@ -32,29 +32,29 @@
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}">
 
-            <div class="d-flex justify-content-around">
-                <div>
-                    <!-- Remember me -->
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" value="on" name="_remember_me">
-                        <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi </label>
-                    </div>
-                </div>
-
-
-                <div>
-                    <!-- Forgot password -->
-                    <a href="{{ path('app_forgotten_password') }}">MDP oublié ?</a>
-                </div>
+            <!-- Remember me -->
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" value="on" name="_remember_me">
+                <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi </label>
             </div>
 
-            <!-- Sign in button -->
-            <button class="btn btn-info btn-block my-4" type="submit">Se connecter</button>
+
+            <br>
+
+            <div>
+                <!-- Forgot password -->
+                <a class="mdp" href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
+            </div>
 
             <!-- Register -->
             <p>Vous n'avez pas de compte ?
                 <a href="{{ path('app_register') }}">Inscrivez-vous</a>
             </p>
+
+            <div class="justify">
+                <!-- Sign in button -->
+                <button class="button_submit" type="submit">Se connecter</button>
+            </div>
 
         </div>
     </form>

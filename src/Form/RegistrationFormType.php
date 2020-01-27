@@ -1,5 +1,7 @@
 <?php
+
 // src/App/Form/RegistrationFormType.php
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -7,33 +9,29 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
-            ->add('email', null, array ('label' => false))
-            ->add('username', null, array ('attr' => array('placeholder' => 'Nom'), 'required' => true))
-            ->add('ville', null, array ('attr' => array('placeholder' => 'Ville')))
-            ->add('raisonSociale', TextType::class, array ('attr' => array('placeholder' => 'Magasin'), 'required' => true))
+            ->add('email', null, ['label' => false])
+            ->add('username', null, ['attr' => ['placeholder' => 'Nom'], 'required' => true])
+            ->add('ville', null, ['attr' => ['placeholder' => 'Ville']])
+            ->add('raisonSociale', TextType::class, ['attr' => ['placeholder' => 'Magasin'], 'required' => true])
 
-
-            ->add('plainPassword', RepeatedType::class, [
+            ->add('password', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'type' => PasswordType::class,
-                'first_options'  => array('attr' => array('placeholder' => 'Mot de passe')),
-                'second_options' => array('attr' => array('placeholder' => 'Répétez le mot de passe',)),
+                'first_options' => ['attr' => ['placeholder' => 'Mot de passe']],
+                'second_options' => ['attr' => ['placeholder' => 'Répétez le mot de passe']],
                 'invalid_message' => 'Les mots de passe sont différents !',
                 'constraints' => [
                     new NotBlank([
@@ -46,7 +44,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])      
+            ])
 
             ->add('roles', ChoiceType::class, [
                 'choices' => [
@@ -55,7 +53,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'multiple' => false,
                 'expanded' => true,
-                'mapped' => false
+                'mapped' => false,
             ])
 
             ;

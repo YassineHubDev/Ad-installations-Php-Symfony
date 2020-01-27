@@ -8,6 +8,7 @@
         "easycorp/easyadmin-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.1",
         "sonata-project/admin-bundle": "^3.51",
+        "squizlabs/php_codesniffer": "^3.5",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.3.*",
         "symfony/console": "4.3.*",

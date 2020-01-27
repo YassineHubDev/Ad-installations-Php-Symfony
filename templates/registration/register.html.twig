@@ -79,17 +79,17 @@
 
         <div class="form-row">
             <div class="col">
-                {{ form_row(registrationForm.plainPassword.first, {'label' : false})}}
+                {{ form_row(registrationForm.password.first, {'label' : false})}}
             </div>
 
             <div class="col">    
-                {{ form_row(registrationForm.plainPassword.second, {'label' : false}) }}
+                {{ form_row(registrationForm.password.second, {'label' : false}) }}
             </div>
         </div>
 
 
         {{ form_widget(registrationForm) }}
-        <input type="submit" class="btn btn-success" value="Soumettre"/> 
+        <input type="submit" class="button_submit" value="Soumettre"/> 
         {{ form_end(registrationForm) }}
 
      {{ form_end(registrationForm) }}

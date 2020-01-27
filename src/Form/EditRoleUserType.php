@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Form;
-
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +20,7 @@ class EditRoleUserType extends AbstractType
                     'Super administrateur' => 'ROLE_SUPER_ADMIN',
                 ],
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
             ])
             ;
     }
@@ -33,5 +31,4 @@ class EditRoleUserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
-
 }

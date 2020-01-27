@@ -9,7 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class FooterController extends AbstractController
 {
     /**
-     * @Route("protection-des-donnees", name="app_rgpd")
+     * @Route("politiques-de-confidentialite", name="app_rgpd")
+     *
      * @return Response
      */
     public function apropos(): Response
@@ -17,9 +18,9 @@ class FooterController extends AbstractController
         return $this->render('footerpages/rgpd.html.twig');
     }
 
-
     /**
      * @Route("mentions-legales", name="app_mentions")
+     *
      * @return Response
      */
     public function mentions(): Response
@@ -27,9 +28,9 @@ class FooterController extends AbstractController
         return $this->render('footerpages/mentions.html.twig');
     }
 
-
     /**
      * @Route("contacts", name="app_contacts")
+     *
      * @return Response
      */
     public function contacts(): Response

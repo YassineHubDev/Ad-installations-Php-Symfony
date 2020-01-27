@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\HttpFoundation\File\File ;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email déjà utilisé")
@@ -69,6 +69,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string|null
      */
     private $resetToken;
@@ -78,15 +79,10 @@ class User implements UserInterface
      */
     private $active = false;
 
-
     public function __toString()
     {
         return $this->email;
     }
-
-
-
-
 
     //GETTER & SETTER//
 
@@ -94,7 +90,6 @@ class User implements UserInterface
     {
         return $this->id;
     }
-
 
     /**
      * A visual identifier that represents this user.
@@ -113,7 +108,6 @@ class User implements UserInterface
         return $this;
     }
 
-
     public function getRaisonSociale(): ?string
     {
         return $this->raisonSociale;
@@ -125,7 +119,6 @@ class User implements UserInterface
 
         return $this;
     }
-
 
     public function getVille(): ?string
     {
@@ -139,7 +132,6 @@ class User implements UserInterface
         return $this;
     }
 
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -151,7 +143,6 @@ class User implements UserInterface
 
         return $this;
     }
-
 
     /**
      * @see UserInterface
@@ -171,7 +162,6 @@ class User implements UserInterface
 
         return $this;
     }
-
 
     /**
      * @see UserInterface
@@ -205,7 +195,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -217,7 +206,6 @@ class User implements UserInterface
 
         return $this;
     }
-
 
     public function getOldPassword(): ?string
     {
@@ -231,7 +219,6 @@ class User implements UserInterface
         return $this;
     }
 
-
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
@@ -239,12 +226,10 @@ class User implements UserInterface
         return $this;
     }
 
-
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
     }
-
 
     public function getResetToken(): ?string
     {
@@ -257,7 +242,6 @@ class User implements UserInterface
 
         return $this;
     }
-
 
     public function isActive(): ?bool
     {

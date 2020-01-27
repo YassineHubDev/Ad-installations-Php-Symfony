@@ -49,7 +49,6 @@ class Service
      */
     private $magasin_nom;
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -126,6 +125,4 @@ class Service
 
         return $this;
     }
-
-
 }

@@ -10,6 +10,7 @@ class SpecialiteController extends AbstractController
 {
     /**
      * @Route("cuisines", name="app_cuisine")
+     *
      * @return Response
      */
     public function cuisine(): Response
@@ -17,9 +18,9 @@ class SpecialiteController extends AbstractController
         return $this->render('speciality/cuisine.html.twig');
     }
 
-
     /**
      * @Route("salles-de-bain", name="app_sdb")
+     *
      * @return Response
      */
     public function sdb(): Response
@@ -27,9 +28,9 @@ class SpecialiteController extends AbstractController
         return $this->render('speciality/sdb.html.twig');
     }
 
-
     /**
      * @Route("dressing", name="app_placard")
+     *
      * @return Response
      */
     public function placard(): Response

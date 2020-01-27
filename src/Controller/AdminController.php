@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class AdminController
+ * Class AdminController.
+ *
  * @Route("/admin")
  */
 class AdminController extends AbstractController
@@ -27,21 +28,19 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/adminuserlist", name="admin_user_list")
-     * @param UserRepository $repository
+     *
      * @return Response
      */
     public function listUser(UserRepository $repository): Response
     {
         return $this->render('admin/user/list.html.twig', [
-            'users' => $repository->findAll()
+            'users' => $repository->findAll(),
         ]);
     }
 
     /**
      * @Route("/changeroles/{id}", name="admin_user_changeroles")
-     * @param User $user
-     * @param Request $request
-     * @param ObjectManager $manager
+     *
      * @return Response
      */
     public function changeRole(User $user, Request $request, ObjectManager $manager): Response
@@ -52,14 +51,15 @@ class AdminController extends AbstractController
             $manager->flush();
             $this->addFlash(
                 'success',
-                'Nouveaux rôles de ' . $user->getEmail() . ' : ' . implode(', ', $user->getRoles())
+                'Nouveaux rôles de '.$user->getEmail().' : '.implode(', ', $user->getRoles())
             );
+
             return $this->redirectToRoute('admin_user_list');
         }
+
         return $this->render('admin/user/change-role.html.twig', [
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
         ]);
     }
-
 }

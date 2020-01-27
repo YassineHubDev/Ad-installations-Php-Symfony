@@ -73,13 +73,13 @@ security:
     access_control:
         - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/easy-admin, role: ROLE_ADMIN}
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/form-magasin, role: ROLE_MAGASIN }
-        - { path: ^/form-client, role: ROLE_CLIENT }
+        - { path: ^/votre-projet-magasin, role: ROLE_MAGASIN }
+        - { path: ^/votre-projet-particulier, role: ROLE_CLIENT }
         - { path: ^/mon-profil, role: IS_AUTHENTICATED_REMEMBERED }
-        - { path: ^/modif-mot-de-passe, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/modification-du-mot-de-passe, role: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/votre-profil, role: IS_AUTHENTICATED_REMEMBERED }
         
         

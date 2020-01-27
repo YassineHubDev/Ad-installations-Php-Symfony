@@ -3,7 +3,7 @@
 
 
 {% block title %}
-    Placards
+Placards
 {% endblock %}
 
 
@@ -15,62 +15,69 @@
     <div>
         <img class="photo-opacity2" src="img/upload/placard.jpg" alt="photo_placard">    
     </div>
-    
+
     <div>
-        <h1 class="titrespe">NOS REALISATIONS DE DRESSING</h1>
+        <h1 class="titreSpeDressing">NOS DRESSING</h1>
     </div>
-    
+
 </figure>
 
 <main class="container">
- 
-   <br>
-   
-   <div>
-       <p>Le dressing sur-mesure est un moyen d'augmenter la plus-value de votre bien immobilier. Nous sommes spécialisés dans l'installation de dressing du modèle simple au modèle design. L'installations peut varier entre 2 et 4 jours. </p>
-   </div>
-   
- <section id="la_cuisine"> 
-   
-   <div class="cuisine_test7">
-    <a data-fancybox="gallery" href="img/upload/placards/dressing.jpg">
-     <img class="img_gal" src="img/upload/placards/dressing.jpg" alt="dressing">
-    </a>
-   </div>
-   
-   <div class="cuisine_test7">
-    <a data-fancybox="gallery" href="img/upload/placards/meuble_tv.jpg">
-     <img class="img_gal" src="img/upload/placards/meuble_tv.jpg" alt="meuble_tv">
-    </a>
-   </div>
-   
-   <div class="cuisine_test7">
-    <a data-fancybox="gallery" href="img/upload/placards/placard_cube.jpg">
-     <img class="img_gal" src="img/upload/placards/placard_cube.jpg" alt="placard_cube">
-    </a>
-   </div>
-   
-   <div class="cuisine_test7">
-    <a data-fancybox="gallery" href="img/upload/placards/placard_cube2.jpg">
-     <img class="img_gal" src="img/upload/placards/placard_cube2.jpg" alt="placard_cube2">
-    </a>
-   </div>
-   
-   <div class="cuisine_test7">
-    <a data-fancybox="gallery" href="img/upload/placards/dressing_L.jpg">
-     <img class="img_gal" src="img/upload/placards/dressing_L.jpg" alt="dressing_L">
-    </a>
-   </div>
-  
-   <div class="cuisine_test7">
-    <a data-fancybox="gallery" href="img/upload/placards/dressing_room.jpg">
-     <img class="img_gal" src="img/upload/placards/dressing_room.jpg" alt="dressing_room">
-    </a>
-   </div>
-   
-   
-</section>
 
+    <br>
+
+    <div>
+        <p>Le dressing sur-mesure est un moyen d'augmenter la plus-value de votre bien immobilier. Nous sommes spécialisés dans l'installation de dressing du modèle simple au modèle design. L'installations peut varier entre 2 et 4 jours. </p>
+    </div>
+
+    <section id="la_cuisine"> 
+
+        <div class="cuisine_test7">
+            <a data-fancybox="gallery" href="img/upload/placards/dressing.jpg">
+                <img class="img_gal" src="img/upload/placards/dressing.jpg" alt="dressing">
+            </a>
+        </div>
+
+        <div class="cuisine_test7">
+            <a data-fancybox="gallery" href="img/upload/placards/meuble_tv.jpg">
+                <img class="img_gal" src="img/upload/placards/meuble_tv.jpg" alt="meuble_tv">
+            </a>
+        </div>
+
+        <div class="cuisine_test7">
+            <a data-fancybox="gallery" href="img/upload/placards/placard_cube.jpg">
+                <img class="img_gal" src="img/upload/placards/placard_cube.jpg" alt="placard_cube">
+            </a>
+        </div>
+
+        <div class="cuisine_test7">
+            <a data-fancybox="gallery" href="img/upload/placards/placard_cube2.jpg">
+                <img class="img_gal" src="img/upload/placards/placard_cube2.jpg" alt="placard_cube2">
+            </a>
+        </div>
+
+        <div class="cuisine_test7">
+            <a data-fancybox="gallery" href="img/upload/placards/dressing_L.jpg">
+                <img class="img_gal" src="img/upload/placards/dressing_L.jpg" alt="dressing_L">
+            </a>
+        </div>
+
+        <div class="cuisine_test7">
+            <a data-fancybox="gallery" href="img/upload/placards/dressing_room.jpg">
+                <img class="img_gal" src="img/upload/placards/dressing_room.jpg" alt="dressing_room">
+            </a>
+        </div>
+    </section>
+
+    <div class="cuisineTest_1">
+        {% if is_granted('ROLE_CLIENT') %}
+        <a class="cuisineTest" href="{{ path('app_form_client') }}">CONTACTEZ-NOUS</a>
+        {% elseif is_granted('ROLE_MAGASIN') %}
+        <a class="cuisineTest" href="{{ path('app_form_magasin') }}">CONTACTEZ-NOUS</a>
+        {% else %}
+        <a class="cuisineTest" href="{{ path('app_login') }}">CONTACTEZ-NOUS</a>
+        {% endif %}
+    </div>
 
 </main>
 

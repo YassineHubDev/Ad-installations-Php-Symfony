@@ -12,7 +12,7 @@ Cuisines
     </div>
 
     <div>
-        <h1 class="titrespe">NOS REALISATIONS DE CUISINES</h1>
+        <h1 class="titreSpeCuisine">NOS CUISINES</h1>
     </div>
 </figure>
 
@@ -132,9 +132,21 @@ Cuisines
             <a data-fancybox="gallery" href="img/upload/cuisines/IMG_20191123_010340.jpg">
                 <img class="img_gal" src="img/upload/cuisines/IMG_20191123_010340.jpg" alt="tirroir_desing">
             </a>
-        </div>  
-
+        </div> 
     </section>
+
+    <div class="cuisineTest_1">
+        {% if is_granted('ROLE_CLIENT') %}
+        <a class="cuisineTest" href="{{ path('app_form_client') }}">CONTACTEZ-NOUS</a>
+        {% elseif is_granted('ROLE_MAGASIN') %}
+        <a class="cuisineTest" href="{{ path('app_form_magasin') }}">CONTACTEZ-NOUS</a>
+        {% else %}
+        <a class="cuisineTest" href="{{ path('app_login') }}">CONTACTEZ-NOUS</a>
+        {% endif %}
+    </div>
+
+
+
 </main>
 
 {% endblock %}
